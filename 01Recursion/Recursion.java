@@ -36,15 +36,24 @@ public class Recursion{
     if (n < 0) {
       throw new IllegalArgumentException();
     }else{
-      s2(n,1);
-    }
-    public static double s2(double n, double g){
-      if(//left off here
-    }
-
-      public static void main(String[]args){
-        System.out.println(name());
-        System.out.println(fact(5));
-        System.out.println(fact(-5));
+      if (n < 0) {
+        throw new IllegalArgumentException();
+      }else{
+        return  s2(n,1);
       }
     }
+  }
+  public static double s2(double n, double g){
+    if(Math.abs((((n / g + g) / 2)-g))>0.00000000000000001){
+      return s2(n,(n / g + g) / 2);
+    }else{
+      return g;
+    }
+  }
+
+  public static void main(String[]args){
+    System.out.println(name());
+    System.out.println(sqrt(9801));
+    System.out.println("meow");
+  }
+}
