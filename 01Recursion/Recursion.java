@@ -1,10 +1,10 @@
-public class Recursion{
+public class Recursion implements hw1{
 
-  public static String name(){
+  public String name(){
     return "Ng,Felicity";
   }
 
-  public static int fact(int n){
+  public int fact(int n){
     if (n < 0) {
       throw new IllegalArgumentException();
     }else{
@@ -16,15 +16,14 @@ public class Recursion{
     }
   }
 
-  //fibonacci: some numbers, starting with 47, start to become negative
-  public static int fib(int n){
+  public int fib(int n){
     if (n < 0) {
       throw new IllegalArgumentException();
     }else{
       return f2(n,0,1);
     }
   }
-  public static  int f2(int n,int x,int y){
+  private int f2(int n,int x,int y){
     if(n == 0){
       return x;
     }else{
@@ -32,7 +31,7 @@ public class Recursion{
     }
   }
 
-  public static double sqrt(double n){
+  public double sqrt(double n){
     if (n < 0) {
       throw new IllegalArgumentException();
     }else{
@@ -43,7 +42,7 @@ public class Recursion{
       }
     }
   }
-  public static double s2(double n, double g){
+  private double s2(double n, double g){
     if(Math.abs((((n / g + g) / 2)-g))>0.00000000000000001){
       return s2(n,(n / g + g) / 2);
     }else{
@@ -51,9 +50,4 @@ public class Recursion{
     }
   }
 
-  public static void main(String[]args){
-    System.out.println(name());
-    System.out.println(sqrt(9801));
-    System.out.println("meow");
-  }
 }
