@@ -14,6 +14,15 @@ public class KnightsTour{
 
     public KnightsTour(int n){
 	board = new int[n][n];
+	for(int i=0;i<n;i++){
+	    for(int ii=0;ii<n;ii++){
+		board[i][ii]=0;
+	    }
+	}
+    }
+
+    public String name(){
+	return "ng.felicity";
     }
 
     //terminal specific character to move the cursor
@@ -31,10 +40,15 @@ public class KnightsTour{
 
     public String toString(){
 	String ans = "\n";
-	//build your knights tour here...
+	for(int i = 0; i<board.length;i++){
+	    for(int ii=0; ii<board.length;ii++){
+		ans = ans + board[i][ii];
+	    }
+	    ans = ans + "\n";
+	}
 	return hide + go(0,0) + ans + "\n" + show;
     }
-    
+    /*
     public void solve(){
 	solve(0,0,1);
     }
@@ -42,14 +56,17 @@ public class KnightsTour{
     public void solve(int startx, int starty){
 	solve(startx,starty,1);
     }
-
-		
+    */
     public boolean solve(int x,int y,int currentMoveNumber){
-	System.out.println(this);
-	wait(20);
-	/*	if(board[x][y]==(board.length*board.length-1)){
+	//	System.out.println(this);
+	//	wait(20);
+      	if(board[x][y]==(board.length*board.length)){
 	    return true;
-	    }*/
+	}
+	if(x>board.length || y>board.length){
+	    return false;
+	}
+   
 	if(board[x][y] == 0){
 	    board[x][y]= currentMoveNumber;
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
@@ -61,12 +78,11 @@ public class KnightsTour{
 	       solve(x+1,y-2,currentMoveNumber+1) ||
 	       solve(x-1,y-2,currentMoveNumber+1)){
 		return true;
-	    }else{
-		board[x][y] = -1;
 	    }
+	}else{
+	    return false;
 	}
 	return false;
     }
-
 
 }
