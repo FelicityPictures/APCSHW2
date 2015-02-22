@@ -62,7 +62,11 @@ public class KnightsTour{
 	    return false;
     }
     if(board[x][y] != 0){
-	    return(currentMoveNumber == board.length*board.length);
+	    return false;
+    }
+    if(board[x][y]==0 && currentMoveNumber == board.length*board.length){
+      board[x][y]=currentMoveNumber;
+      return true;
     }
     board[x][y] = currentMoveNumber;
     if(meow(x+2,y+1,currentMoveNumber+1) ||
@@ -80,7 +84,7 @@ public class KnightsTour{
   }
 
   public static void main(String[]args){
-    KnightsTour k = new KnightsTour(6);
+    KnightsTour k = new KnightsTour(5);
     k.solve();
     System.out.println(k);
   }
