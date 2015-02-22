@@ -86,8 +86,6 @@ public class NQueens{
         for(int ii=0;ii<board.length;ii++){
           if(board[i][ii]=='-'){
             return meow(i,ii,numberLeft-1);
-          }else{
-            return false;
           }
         }
       }
@@ -96,7 +94,7 @@ public class NQueens{
   }
 
   public static void main(String[]args){
-    NQueens q = new NQueens(5);
+    NQueens q = new NQueens(8);
     q.solve();
     System.out.println(q);
   }
