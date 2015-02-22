@@ -1,18 +1,12 @@
 import java.util.*;
 import java.io.*;
 
-
-public class KnightsTour{
-  //constants for the class
-  //terminal specific character to clear screen , or hide/show cursor
+public class NQueens{
+  private int[][]board;
   final static String clear =  "\033[2J";
   final static String hide =  "\033[?25l";
   final static String show =  "\033[?25h";
-
-  //instance variable
-  private int[][]board;
-
-  public KnightsTour(int n){
+  public NQueens(int n){
     board = new int[n][n];
     for(int i=0;i<board.length;i++){
 	    for(int ii=0;ii<board.length;ii++){
@@ -25,17 +19,8 @@ public class KnightsTour{
     return "ng.felicity";
   }
 
-  //terminal specific character to move the cursor
   private String go(int x,int y){
     return ("\033[" + x + ";" + y + "H");
-  }
- 
-  public void wait(int millis){
-    try {
-	    Thread.sleep(millis);
-    }
-    catch (InterruptedException e) {
-    }
   }
 
   public String toString(){
@@ -48,16 +33,16 @@ public class KnightsTour{
     }
     return hide + go(0,0) + ans + "\n" + show;
   }
-    
+
   public boolean solve(){
     return meow(0,0,1);
-  }	
+  }
 
-  public boolean solve(int x,int y){
+  public boolean solve(int x, int y){
     return meow(x,y,1);
   }
-  
- public boolean meow(int x, int y, int currentMoveNumber){
+
+  public boolean meow(int x, int y, int currentMoveNumber){
     if(x >= board.length || y >= board.length || x < 0 || y < 0){
 	    return false;
     }
@@ -65,24 +50,30 @@ public class KnightsTour{
 	    return(currentMoveNumber == board.length*board.length);
     }
     board[x][y] = currentMoveNumber;
-    if(meow(x+2,y+1,currentMoveNumber+1) ||
-       meow(x+2,y-1,currentMoveNumber+1) ||
-       meow(x-2,y+1,currentMoveNumber+1) ||
-       meow(x-2,y-1,currentMoveNumber+1) ||
-       meow(x+1,y+2,currentMoveNumber+1) ||
-       meow(x-1,y+2,currentMoveNumber+1) ||
-       meow(x+1,y-2,currentMoveNumber+1) ||
-       meow(x-1,y-2,currentMoveNumber+1)){
-	    return true;
+    for(int xx=1;x+xx<board.length || x-xx>0;x++){
+      if(meow(x+xx,y,currentMoveNumber+1) ||
+         meow(x-xx,y,currentMoveNumber+1)){
+        return true;
+      }
+      for(int yy=1;y+yy<board.length||y-yy>0;y++){
+        if(meow(x,y+yy,currentMoveNumber+1) ||
+           meow(x,y-yy,currentMoveNumber+1) ||
+           meow(x+xx,y+yy,currentMoveNumber+1) ||
+           meow(x+xx,y-yy,currentMoveNumber+1) ||
+           meow(x-xx,y+yy,currentMoveNumber+1) ||
+           meow(x-xx,y-yy,currentMoveNumber+1)){
+          return true;
+        }
+      }
     }
     board[x][y] = 0;
     return false;
   }
 
   public static void main(String[]args){
-    KnightsTour k = new KnightsTour(6);
-    k.solve();
-    System.out.println(k);
+    NQueens q = new NQueens(6);
+    q.solve();
+    System.out.println(q);
   }
 
 }
