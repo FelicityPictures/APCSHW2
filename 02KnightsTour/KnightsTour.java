@@ -84,9 +84,19 @@ public class KnightsTour{
   }
 
   public static void main(String[]args){
+    KnightsTour t = new KnightsTour(5);
+    System.out.println(t.name());
+    System.out.println("Knights Tour:");
+
     KnightsTour k = new KnightsTour(5);
+    System.out.println("1");
     k.solve();
     System.out.println(k);
+
+    KnightsTour u = new KnightsTour(5);
+    System.out.println("2");
+    u.solve(3,3);
+    System.out.println(u);
   }
 
 }

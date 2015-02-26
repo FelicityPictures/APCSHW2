@@ -1,0 +1,5 @@
+public class merge{
+
+  public static int[] merge(int[]a,int[]b){
+    int[]x = new int[a.length+b.length];
+    for(
