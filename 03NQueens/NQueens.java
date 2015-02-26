@@ -36,66 +36,83 @@ public class NQueens{
   }
 
   public boolean solve(){
-    return meow(0,0,board.length);
-  }
-
-  public boolean solve(int x, int y){
-    return meow(x,y,board.length);
-  }
-
-  public boolean meow(int x, int y, int numberLeft){
-    board[x][y]='Q';
-    for(int i = 1; x+i<board.length || x-i>0 || y+i<board.length || y-i>0;i++){
-      try{
-        board[x+i][y] = 'x';
-      }catch(Exception e){}
-
-      try{board[x-i][y]='x';
-      }catch(Exception e){}
-
-      try{
-        board[x][y+i] = 'x';
-      }catch(Exception e){}
-
-      try{
-        board[x][y-i] = 'x';
-      }catch(Exception e){}
-
-      try{
-        board[x+i][y+i] = 'x';
-      }catch(Exception e){}
-
-      try{
-        board[x+i][y-i] = 'x';
-      }catch(Exception e){}
-
-      try{
-        board[x-i][y+i] = 'x';
-      }catch(Exception e){}
-
-      try{
-        board[x-i][y-i] = 'x';
-      }catch(Exception e){}
-
-    }
-
-    if(numberLeft-1 == 0){
-      return true;
-    }else{
-      for(int i=0;i<board.length;i++){
-        for(int ii=0;ii<board.length;ii++){
-          if(board[i][ii]=='-'){
-            return meow(i,ii,numberLeft-1);
-          }
-        }
-      }
-    }
     return false;
   }
 
+  private boolean meow(int x,int y,int q){
+    if(x>board.length || y>board.length){
+      return false;
+    }
+    if(q==board.length){
+      return true;
+    }
+    if(!checkAll(x,y)){
+      return false;
+    }
+    board[x][y]='Q';
+    if(meow(x,y+1,q+1)){
+      return meow(x+1,y+2,q+1);
+    }/*else{
+      return meow(x+1,y,q+1);
+      }*/
+    board[x][y]='-';
+    return false;
+  }
+  
+  private boolean horizontalCheck(int x){
+    for(int i=0;i<board.length;i++){
+      if(board[x][i]=='Q'){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private boolean verticalCheck(int y){
+    for(int i=0;i<board.length;i++){
+      if(board[i][y]=='Q'){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private boolean diagonalCheck(int x,int y){
+    for(int i=0; x+i<board.length && y+i<board.length;i++){
+      if(board[x+i][y+1] == 'Q'){
+        return false;
+      }
+		}
+    for(int i=0; x-i>0 && y-i>0;i++){
+      if(board[x-i][y-i]=='Q'){
+        return false;
+      }
+    }
+    for(int i=0;x-i>0 && y+i<board.length;i++){
+      if(board[x-i][y+i]=='Q'){
+        return false;
+      }
+    }
+    for(int i=0;x+i<board.length && y-i>0;i++){
+      if(board[x+i][y-i] == 'Q'){
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  private boolean checkAll(int x,int y){
+    if(verticalCheck(y) && horizontalCheck(x) && diagonalCheck(x,y)){
+      return true;
+    }
+    return false;
+  }
+  
+  
+  
   public static void main(String[]args){
     NQueens q = new NQueens(8);
-    q.solve();
+    q.solve(0,0,8);
     System.out.println(q);
   }
 
