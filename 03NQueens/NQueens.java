@@ -44,21 +44,21 @@ public class NQueens{
   }
 
   private boolean solve(int x,int y,int q){
-	    if(q==board.length){
+    if(q==board.length){
 	    return true;
     }
-      if(checkAll(x,y) && x<board.length && y<board.length){
-        board[x][y]='Q';
-        if(solve(0,y+1,q+1)){
-          return true;
-        }
-        board[x][y]='-';
-      }
-      if(x<board.length){
-        return solve(x+1,y,q);
-      }else{
-        return false;
-      }
+    if( x<board.length && y<board.length && checkAll(x,y)){
+	    board[x][y]='Q';
+	    if(solve(0,y+1,q+1)){
+        return true;
+	    }
+	    board[x][y]='-';
+    }
+    if(x<board.length){
+	    return solve(x+1,y,q);
+    }else{
+	    return false;
+    }
   }
   
   private boolean horizontalCheck(int x){
@@ -110,7 +110,7 @@ public class NQueens{
   
   
   public static void main(String[]args){
-    NQueens q = new NQueens(8);
+    NQueens q = new NQueens(10);
     q.solve();
     System.out.println(q);
   }
