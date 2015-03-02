@@ -35,8 +35,8 @@ public class NQueens{
     return  ans + "\n" + show;
   }
 
-  public void solve(){
-    solve(0);
+  public boolean solve(){
+    return solve(0);
   }
 
   public boolean solve(int x){
@@ -105,14 +105,6 @@ public class NQueens{
   
   private boolean checkAll(int x,int y){
     return verticalCheck(y)  && horizontalCheck(x) && diagonalCheck(x,y);
-  }
-  
-  
-  
-  public static void main(String[]args){
-    NQueens q = new NQueens(10);
-    q.solve();
-    System.out.println(q);
   }
 
 }
