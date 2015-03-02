@@ -46,7 +46,7 @@ public class makeLake{
     }
   }
 
-  private void stomp(){
+  public void stomp(){
     for(int i = 0;i<instructions.length;i++){
 	    stomp(i);
     }
