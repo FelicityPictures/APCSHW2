@@ -22,41 +22,25 @@ public class sorts{
           bc++;
         }
       }
-      mergesort(a);
-      mergesort(b);
-      orig = combine(a,b);
+      //mergesort(a);
+      //mergesort(b);
+      orig = combine(cat(a),cat(b));
     }
     return orig;
   }
 
   public static int[] combine(int[]a,int[]b){
     int[]out = new int[a.length + b.length];
-    int i=0;
     int aa=0;
     int bb=0;
-    while(i<out.length){
-      if(aa<a.length && bb<b.length){
-        if(a[aa]<b[bb]){
-          out[i]=a[aa];
+    while(aa<a.length && bb<b.length){
+	if(aa<a.length || (bb<b.length && a[aa]<b[bb])){
+          out[aa+bb]=a[aa];
           aa++;
-        }else{
-          out[i]=b[bb];
-          bb++;
-        }
-      }else{
-        if(aa>=a.length){
-          while(bb<b.length){
-            out[i]=b[bb];
-            bb++;
-          }
-        }else{
-          while(aa<a.length){
-            out[i]=a[aa];
-            aa++;
-          }
-        }
-      }
-      i++;
+	}else{
+	    out[aa+bb]=b[bb];
+	    bb++;
+	}
     }
     return out;
   }
@@ -76,6 +60,7 @@ public class sorts{
     for(int i=0;i<t.length;i++){
       t[i]=rand.nextInt(25);
     }
+    displayIt(t);
     mergesort(t);
     displayIt(t);
   }
