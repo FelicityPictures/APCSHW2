@@ -34,13 +34,24 @@ public class sorts{
     int aa=0;
     int bb=0;
     while(aa<a.length && bb<b.length){
-	if(aa<a.length || (bb<b.length && a[aa]<b[bb])){
-          out[aa+bb]=a[aa];
-          aa++;
-	}else{
-	    out[aa+bb]=b[bb];
-	    bb++;
-	}
+      if(a[aa]<b[bb]){
+        out[aa+bb]=a[aa];
+        aa++;
+      }else{
+        out[aa+bb]=b[bb];
+        bb++;
+      }
+    }
+    if(aa<a.length){
+      while(aa<a.length){
+        out[aa+bb]=a[aa];
+        aa++;
+      }
+    }else{
+      while(bb<b.length){
+        out[aa+bb]=b[bb];
+        bb++;
+      }
     }
     return out;
   }
@@ -54,7 +65,7 @@ public class sorts{
     System.out.println(out);
   }
 
- public static void main(String[]arg){
+  public static void main(String[]arg){
     Random rand = new Random(1);
     int[]t=new int[8];
     for(int i=0;i<t.length;i++){
