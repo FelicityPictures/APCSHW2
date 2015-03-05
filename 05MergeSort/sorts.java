@@ -2,8 +2,12 @@ import java.util.*;
 import java.io.*;
 
 public class sorts{
+
   public static void mergesort(int[]r){
-    r = cat(r);
+    int[]q=cat(r);
+    for(int i=0;i<q.length;i++){
+      r[i]=q[i];
+    }
   }
   
   public static int[] cat(int[]orig){
