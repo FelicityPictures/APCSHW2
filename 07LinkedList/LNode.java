@@ -27,4 +27,10 @@ public class LNode{
 	next = n;
     }
 
+    public String toString(){
+	String s = "";
+	s = s+data;
+	return s;
+    }
+
 }
