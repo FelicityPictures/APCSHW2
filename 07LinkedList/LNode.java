@@ -11,6 +11,11 @@ public class LNode{
 	data = d;
     }
 
+    public LNode(){
+	data=0;
+	next=null;
+    }
+
     public int getData(){
 	return data;
     }
