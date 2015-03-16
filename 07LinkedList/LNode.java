@@ -38,4 +38,8 @@ public class LNode{
 	return s;
     }
 
+    public String name(){
+	return "ng.felicity";
+    }
+
 }

@@ -18,22 +18,23 @@ public class findIndex{
 		d[start]=a[i];
 		start++;
 	    }else if (a[i]>c){
-d[end]]
-	    if(a[start+i]<c){
-		b[ai]=a[start+i];
-		ai++;
+		d[end]=a[i];
+		if(a[start+i]<c){
+		    b[ai]=a[start+i];
+		    ai++;
+		}
+		if(a[start+i]>c){
+		    b[b.length-bi]=a[start+i];
+		    bi++;
+		}
+		if(b.length-bi == ai){
+		    b[end-bi]=a[start+i];
+		}
+		displayIt(b);
 	    }
-	    if(a[start+i]>c){
-		b[b.length-bi]=a[start+i];
-		bi++;
+	    for(int i=0;i<b.length && start+i<=end;i++){
+		a[start+i]=b[i];
 	    }
-	    if(b.length-bi == ai){
-		b[end-bi]=a[start+i];
-	    }
-	    displayIt(b);
-	}
-	for(int i=0;i<b.length && start+i<=end;i++){
-	    a[start+i]=b[i];
 	}
     }
 
@@ -46,10 +47,12 @@ d[end]]
 	System.out.println(out);
     }
 
+    public String name(){
+	return "ng.felicity";
+    }
 
     public static void main(String[]args){
 	int[]test=new int[10];
-	Random r = new Random();
 	test[0]= 13;
 	test[1]= 2;
 	test[2]= 6;

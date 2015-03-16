@@ -51,7 +51,7 @@ public class quickSelect{
     return a[pivot];
   }
 
-  /*
+  
   public static void displayIt(int[] c) {
     String out = "[ ";
     for (int i = 0; i < c.length - 1; ++i) {
@@ -60,10 +60,9 @@ public class quickSelect{
     out += c[c.length - 1] + " ]";
     System.out.println(out);
   }
-
+    /*
   public static void main(String[]args){
     int[]test=new int[10];
-    Random r = new Random();
     test[0]= 13;
     test[1]= 2;
     test[2]= 6;
