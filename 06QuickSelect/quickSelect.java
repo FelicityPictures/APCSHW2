@@ -60,7 +60,7 @@ public class quickSelect{
     out += c[c.length - 1] + " ]";
     System.out.println(out);
   }
-    /*
+  /*
   public static void main(String[]args){
     int[]test=new int[10];
     test[0]= 13;
@@ -73,7 +73,7 @@ public class quickSelect{
     test[7]= 12;
     test[8]= 1;
     test[9]= 10;
-    System.out.println(quickSelect(test,0));
+    System.out.println(quickSelect(test,3));
   }
   */
 }

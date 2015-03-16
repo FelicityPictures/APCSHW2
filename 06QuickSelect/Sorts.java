@@ -71,7 +71,7 @@ public class Sorts{
 	out += c[c.length - 1] + " ]";
 	System.out.println(out);
     }
-    /*
+  /*
     public static void main(String[]args){
 	int[]test=new int[10];
 	//	Random r = new Random();
@@ -89,5 +89,5 @@ public class Sorts{
 	quickSort(test);
 	displayIt(test);
     }
-    */
+  */
 }
