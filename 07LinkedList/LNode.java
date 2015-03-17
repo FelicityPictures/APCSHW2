@@ -1,45 +1,45 @@
-public class LNode{
-    private int data;
-    private LNode next;
+public class LNode<T>{
+  private T data;
+  private LNode<T> next;
     
-    public LNode(int d,LNode n){
-	data = d;
-	next = n;
-    }
+  public LNode(T d,LNode<T> n){
+    data = d;
+    next = n;
+  }
 
-    public LNode(int d){
-	data = d;
-    }
+  public LNode(T d){
+    data = d;
+  }
 
-    public LNode(){
-	data=0;
-	next=null;
-    }
+  public T getData(){
+    return data;
+  }
 
-    public int getData(){
-	return data;
-    }
+  public void setData(T d){
+    data = d;
+  }
 
-    public void setData(int d){
-	data = d;
-    }
+  public LNode<T> getNext(){
+    return next;
+  }
 
-    public LNode getNext(){
-	return next;
-    }
+  public void setNext(LNode<T> n){
+    next = n;
+  }
 
-    public void setNext(LNode n){
-	next = n;
-    }
+  public String toString(){
+    String s = "";
+    s = s+data.toString();
+    return s;
+  }
 
-    public String toString(){
-	String s = "";
-	s = s+data;
-	return s;
-    }
+  public String name(){
+    return "ng.felicity";
+  }
 
-    public String name(){
-	return "ng.felicity";
-    }
+  public static void main(String[]arg){
+    LNode<Integer> r = new LNode<Integer>(5);
+    System.out.println(r);
+  }
 
 }
