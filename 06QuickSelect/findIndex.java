@@ -10,7 +10,7 @@ public class findIndex{
 	Random rand = new Random();
 	int randomValue=start+rand.nextInt((end-start)+1);
 	int v = a[randomValue];
-  // System.out.println(v);
+   System.out.println(v);
 	int whereIsPivot;
 	int placeholder;
 	int ei=end;
