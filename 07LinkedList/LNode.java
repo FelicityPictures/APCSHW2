@@ -11,6 +11,10 @@ public class LNode<T>{
     data = d;
   }
 
+  public LNode(LNode<T>n){
+    next = n;
+  }
+
   public T getData(){
     return data;
   }
