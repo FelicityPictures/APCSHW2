@@ -10,10 +10,18 @@ public class MyStack<T>{
   }
 
   public T pop(){
+    if(stack.isEmpty()){
+      //throwing new EmptyStackException() does not work
+      return null;
+    }
     return stack.remove();
   }
 
   public T peek(){
+    if(stack.isEmpty()){
+      //throwing new EmptyStackException() does not work
+      return null;
+    }
     return stack.get(0);
   }
 
@@ -29,6 +37,8 @@ public class MyStack<T>{
   public static void main(String[]meow){
     MyStack<Integer> test = new MyStack<Integer>();
     System.out.println(test.empty());
+    System.out.println(test.pop());
+    test.peek();
     test.push(6);
     test.push(7);
     test.push(97);
