@@ -103,17 +103,27 @@ public class MyLinkedList<T> implements Iterable<T>{
     return size;
   }
 
-  public void remove(int index){
+  public T remove(int index){
+    if(index<0 || index>=size){
+      throw new ArrayIndexOutOfBoundsException();
+    }
+    if(index == 0){
+      T out = start.getData();
+      start = start.getNext();
+      return out;
+    }
     LNode<T> now = start;
+    T out;
     for(int i=0;i<index-1;i++){
 	    now = now.getNext();
     }
     LNode<T> yes = now;
-    for(int i=0;i<2;i++){
-	    yes = yes.getNext();
-    }
+    yes = yes.getNext();
+    out = yes.getData();
+    yes = yes.getNext();
     now.setNext(yes);
     size--;
+    return out;
   }
   
   public int IndexOf(T value){
@@ -156,7 +166,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     test.add(98);
     test.add(2);
     System.out.println(test);
-    test.remove(5);
+    System.out.println(test.remove(-1));
     // System.out.println(test.toString());
     System.out.println(test.IndexOf(2));
 
