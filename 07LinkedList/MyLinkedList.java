@@ -64,16 +64,22 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    if(index==size){
         return add(n);
 	    }else{
-        LNode<T> plus = new LNode<T>(n);
-        LNode<T> now = start;
-        for(int i=0;i<index-1;i++){
-          now=now.getNext();
+        if(index==0){
+          LNode<T>plus = new LNode<T>(n);
+          plus.setNext(start);
+          start=plus;
+        }else{
+          LNode<T> plus = new LNode<T>(n);
+          LNode<T> now = start;
+          for(int i=0;i<index-1;i++){
+            now=now.getNext();
+          }
+          plus.setNext(now.getNext());
+          now.setNext(plus);
         }
-        plus.setNext(now.getNext());
-        now.setNext(plus);
-	    }
-	    size++;
-	    return true;
+      }
+      size++;
+      return true;
     }
   }
     
@@ -103,6 +109,10 @@ public class MyLinkedList<T> implements Iterable<T>{
     return size;
   }
 
+  public T remove(){
+    return remove(0);
+  }
+  
   public T remove(int index){
     if(index<0 || index>=size){
       throw new ArrayIndexOutOfBoundsException();
@@ -124,6 +134,13 @@ public class MyLinkedList<T> implements Iterable<T>{
     now.setNext(yes);
     size--;
     return out;
+  }
+
+  public boolean isEmpty(){
+    if(size==0){
+      return true;
+    }
+    return false;
   }
   
   public int IndexOf(T value){
