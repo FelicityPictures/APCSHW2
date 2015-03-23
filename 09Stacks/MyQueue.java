@@ -11,9 +11,6 @@ public class MyQueue<T>{
     }
 
     public T dequeue(){
-	if(queue.isEmpty()){
-	    //	    throw new EmptyQueueException();
-	}
 	return queue.remove();
     }
 
