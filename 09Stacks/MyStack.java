@@ -1,5 +1,5 @@
 public class MyStack<T>{
-  MyLinkedList<T> stack;
+  private MyLinkedList<T> stack;
 
   public MyStack(){
     stack = new MyLinkedList<T>();
