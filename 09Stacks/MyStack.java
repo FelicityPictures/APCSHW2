@@ -5,6 +5,10 @@ public class MyStack<T>{
     stack = new MyLinkedList<T>();
   }
   
+  public String name(){
+    return "ng.felicity";
+  }
+
   public void push(T element){
     stack.add(element,0);
   }
