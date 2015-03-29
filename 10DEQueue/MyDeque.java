@@ -1,23 +1,23 @@
 import java.util.*;
 
 public class MyDeque<T>{
-  private Object[]data;
+  private T[]data;
   private int head,tail,size;
 
   public MyDeque(){
-    data = new Object[100];
+    data = (T[])(new Object[100]);
     head=99;
     tail=0;
   }
 
   public MyDeque(int n){
-    data = new Object[n];
+    data = (T[])(new Object[n]);
     head=n-1;
     tail=0;
   }
 
   private void resize(){
-    Object[]replace=new Object[data.length*2];
+    T[]replace=(T[])(new Object[data.length*2]);
     for(int i=0;i<tail+1;i++){
 	    replace[i]=data[i];
     }
@@ -78,11 +78,11 @@ public class MyDeque<T>{
       size--;
       if(tail!=0){
         tail--;
-        Object out = data[tail];
+        T out = data[tail];
         data[tail]=null;
         return out;
       }else{
-        Object out = data[data.length-1];
+        T out = data[data.length-1];
         for(int i=data.length-1;i>head;i--){
           data[i]=data[i-1];
         }
@@ -138,7 +138,7 @@ public class MyDeque<T>{
     }
     return out + "]";
   }
-  /*
+  
   public static void main(String[]meow){
     MyDeque<Integer> t = new MyDeque<Integer>(5);
     t.addFirst(0);
@@ -149,9 +149,9 @@ public class MyDeque<T>{
     System.out.println(t.toString());
     System.out.println(t.raw());
     t.addLast(5);
-    System.out.println(t.getFirst());
+    System.out.println(t.getLast());
     System.out.println(t.toString());
     System.out.println(t.raw());
     }
-  */
+  
 }
