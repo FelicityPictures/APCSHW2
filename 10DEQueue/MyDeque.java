@@ -33,7 +33,7 @@ public class MyDeque{
     
   public void addFirst(Object value){
     data[head]=value;
-    if(head-1 == tail){
+    if(head-1 < tail){
 	    resize();
     }
     head--;
@@ -46,7 +46,7 @@ public class MyDeque{
 
   public void addLast(Object value){
     data[tail]=value;
-    if(tail+1 == head){
+    if(tail+1 > head){
       resize();
     }
     tail++;
@@ -59,7 +59,7 @@ public class MyDeque{
     
   public String toString(){
     String out = "[ ";
-    if(head<=data.length-2){
+    if(head!=data.length-1){
       int h = head+1;
       while(h<data.length){
         out = out + data[h] + " ";
@@ -72,7 +72,7 @@ public class MyDeque{
     return out + "]";
   }
 
-  public String printData(){
+  public String raw(){
     String out = "[ ";
     for(int i=0;i<data.length;i++){
       out = out + data[i] + " ";
@@ -84,18 +84,20 @@ public class MyDeque{
 
   public static void main(String[]meow){
     MyDeque t = new MyDeque(5);
+    t.addFirst(0);
+    System.out.println(t.toString());
+    System.out.println(t.raw());
+    t.addFirst(1);
+    System.out.println(t.toString());
+    System.out.println(t.raw());
+    t.addLast(-1);
+    System.out.println(t.toString());
+    System.out.println(t.raw());
+    t.addLast(-2);
+    System.out.println(t.toString());
+    System.out.println(t.raw());
     t.addFirst(2);
-    System.out.println(t);
-    t.addFirst(3);
-    System.out.println(t);
-    t.addLast(1);
-    System.out.println(t);
-    System.out.println(t.printData());
-    t.addLast(8);
-    t.addLast(5);
-    // t.removeFirst();
-    // t.removeLast();
-    System.out.println(t);
-    System.out.println(t.printData());
+    System.out.println(t.toString());
+    System.out.println(t.raw());
   }
 }
