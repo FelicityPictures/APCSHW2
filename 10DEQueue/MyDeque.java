@@ -1,60 +1,101 @@
 public class MyDeque{
-    private Object[]data;
-    private int head,tail;
+  private Object[]data;
+  private int head,tail;
 
-    public MyDeque(){
-	data = new Object[100];
-	head=99;
-	tail=0;
-    }
+  public MyDeque(){
+    data = new Object[100];
+    head=99;
+    tail=0;
+  }
 
-    public MyDeque(int n){
-	data = new Object[n];
-	head=n-1;
-	tail=0;
-    }
+  public MyDeque(int n){
+    data = new Object[n];
+    head=n-1;
+    tail=0;
+  }
 
-    private void resize(){
-	Object[]replace=new Object[data.length*2];
-	for(int i=0;i<tail;i++){
+  private void resize(){
+    Object[]replace=new Object[data.length*2];
+    for(int i=0;i<tail;i++){
 	    replace[i]=data[i];
-	}
-	int i=data.length-1;
-	while(i!=tail){
-	    replace[i+data.length]=data[i];
+    }
+    int i=data.length-1;
+    int ii=replace.length-1;
+    while(i!=tail){
+	    replace[ii]=data[i];
 	    i--;
-	}
-	head = (i-1)+data.length;
-	data=replace;
-
+      ii--;
     }
+    head = (i-1)+data.length;
+    data=replace;
+
+  }
     
-    public void addFirst(Object value){
-	data[head]=value;
-	if(head-1 != tail){
-	    head--;
-	}else{
+  public void addFirst(Object value){
+    data[head]=value;
+    if(head-1 == tail){
 	    resize();
-	}
     }
+    head--;
+  }
+
+  public void removeFirst(){
+    head++;
+    data[head]=null;
+  }
+
+  public void addLast(Object value){
+    data[tail]=value;
+    if(tail+1 == head){
+      resize();
+    }
+    tail++;
+  }
+
+  public void removeLast(){
+    tail--;
+    data[tail]=null;
+  }
     
-    public String toString(){
-	int h = head;
-	String out = "[ ";
-	while(h<data.length){
-	    out = out + data[h];
-	    h++;
-	}
-	for(int i=0;i<tail;i++){
-	    out = out + data[i];
-	}
-	return out;
+  public String toString(){
+    String out = "[ ";
+    if(head<=data.length-2){
+      int h = head+1;
+      while(h<data.length){
+        out = out + data[h] + " ";
+        h++;
+      }
     }
-
-    //  public static void printIt(String){
-
-    public static void main(String[]meow){
-	MyDeque t = new MyDeque(5);
-	t.addFirst(2);
+    for(int i=0;i<tail;i++){
+	    out = out + data[i] + " ";
     }
+    return out + "]";
+  }
+
+  public String printData(){
+    String out = "[ ";
+    for(int i=0;i<data.length;i++){
+      out = out + data[i] + " ";
+    }
+    return out + "]";
+  }
+
+  //  public static void printIt(String){
+
+  public static void main(String[]meow){
+    MyDeque t = new MyDeque(5);
+    t.addFirst(2);
+    System.out.println(t);
+    t.addFirst(3);
+    System.out.println(t);
+    t.addLast(1);
+    System.out.println(t);
+    System.out.println(t.printData());
+    t.addLast(8);
+    t.addLast(5);
+    // t.removeFirst();
+    // t.removeLast();
+    System.out.println(t);
+    System.out.println(t.printData());
+  }
 }
