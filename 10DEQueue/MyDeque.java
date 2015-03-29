@@ -91,6 +91,30 @@ public class MyDeque{
       }
     }
   }
+
+  public Object getFirst(){
+    if(size==0){
+      throw new NoSuchElementException();
+    }else{
+      if(head!=data.length-1){
+        return data[head+1];
+      }else{
+        return data[0];
+      }
+    }
+  }
+
+    public Object getLast(){
+      if(size==0){
+        throw new NoSuchElementException();
+      }else{
+        if(tail!=0){
+          return data[tail-1];
+        }else{
+          return data[data.length-1];
+        }
+      }
+    }
     
   public String toString(){
     String out = "[ ";
@@ -119,12 +143,12 @@ public class MyDeque{
     MyDeque t = new MyDeque(5);
     t.addFirst(0);
     t.addFirst(1);
-    t.addLast(-1);
-    t.addLast(-2);
+    t.addFirst(-1);
+    t.addFirst(-2);
     t.addFirst(2);
     System.out.println(t.toString());
     System.out.println(t.raw());
-    System.out.println(t.removeLast());
+    System.out.println(t.getFirst());
     System.out.println(t.toString());
     System.out.println(t.raw());
   }
