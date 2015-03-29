@@ -1,23 +1,23 @@
 import java.util.*;
 
 public class MyDeque<T>{
-  private T[]data;
+  private Object[]data;
   private int head,tail,size;
 
-  public MyDeque<T>(){
-    data = new T[100];
+  public MyDeque(){
+    data = new Object[100];
     head=99;
     tail=0;
   }
 
-  public MyDeque<T>(int n){
-    data = new T[n];
+  public MyDeque(int n){
+    data = new Object[n];
     head=n-1;
     tail=0;
   }
 
   private void resize(){
-    T[]replace=new T[data.length*2];
+    Object[]replace=new Object[data.length*2];
     for(int i=0;i<tail+1;i++){
 	    replace[i]=data[i];
     }
@@ -78,11 +78,11 @@ public class MyDeque<T>{
       size--;
       if(tail!=0){
         tail--;
-        T out = data[tail];
+        Object out = data[tail];
         data[tail]=null;
         return out;
       }else{
-        T out = data[data.length-1];
+        Object out = data[data.length-1];
         for(int i=data.length-1;i>head;i--){
           data[i]=data[i-1];
         }
