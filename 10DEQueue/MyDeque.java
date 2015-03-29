@@ -16,26 +16,26 @@ public class MyDeque{
 
   private void resize(){
     Object[]replace=new Object[data.length*2];
-    for(int i=0;i<tail;i++){
+    for(int i=0;i<tail+1;i++){
 	    replace[i]=data[i];
     }
     int i=data.length-1;
     int ii=replace.length-1;
-    while(i!=tail){
+    while(i>tail){
 	    replace[ii]=data[i];
 	    i--;
       ii--;
     }
-    head = (i-1)+data.length;
+    head = ii;
     data=replace;
 
   }
     
   public void addFirst(Object value){
-    data[head]=value;
     if(head-1 < tail){
 	    resize();
     }
+    data[head]=value;
     head--;
   }
 
@@ -45,10 +45,10 @@ public class MyDeque{
   }
 
   public void addLast(Object value){
-    data[tail]=value;
     if(tail+1 > head){
       resize();
     }
+    data[tail]=value;
     tail++;
   }
 
