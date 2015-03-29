@@ -1,6 +1,8 @@
+import java.util.*;
+
 public class MyDeque{
   private Object[]data;
-  private int head,tail;
+  private int head,tail,size;
 
   public MyDeque(){
     data = new Object[100];
@@ -28,7 +30,6 @@ public class MyDeque{
     }
     head = ii;
     data=replace;
-
   }
     
   public void addFirst(Object value){
@@ -37,11 +38,28 @@ public class MyDeque{
     }
     data[head]=value;
     head--;
+    size++;
   }
 
-  public void removeFirst(){
-    head++;
-    data[head]=null;
+  public Object removeFirst(){
+    if(size==0){
+      throw new NoSuchElementException();
+    }else{
+      size--;
+      if(head!=data.length-1){
+        head++;
+        Object out = data[head];
+        data[head]=null;
+        return out;
+      }else{
+        Object out = data[0];
+        for(int i=0;i<tail;i++){
+          data[i]=data[i+1];
+        }
+        tail--;
+        return out;
+      }
+    }
   }
 
   public void addLast(Object value){
@@ -50,11 +68,28 @@ public class MyDeque{
     }
     data[tail]=value;
     tail++;
+    size++;
   }
 
-  public void removeLast(){
-    tail--;
-    data[tail]=null;
+  public Object removeLast(){
+    if(size==0){
+      throw new NoSuchElementException();
+    }else{
+      size--;
+      if(tail!=0){
+        tail--;
+        Object out = data[tail];
+        data[tail]=null;
+        return out;
+      }else{
+        Object out = data[data.length-1];
+        for(int i=data.length-1;i>head;i--){
+          data[i]=data[i-1];
+        }
+        head++;
+        return out;
+      }
+    }
   }
     
   public String toString(){
@@ -80,23 +115,16 @@ public class MyDeque{
     return out + "]";
   }
 
-  //  public static void printIt(String){
-
   public static void main(String[]meow){
     MyDeque t = new MyDeque(5);
     t.addFirst(0);
-    System.out.println(t.toString());
-    System.out.println(t.raw());
     t.addFirst(1);
-    System.out.println(t.toString());
-    System.out.println(t.raw());
     t.addLast(-1);
-    System.out.println(t.toString());
-    System.out.println(t.raw());
     t.addLast(-2);
+    t.addFirst(2);
     System.out.println(t.toString());
     System.out.println(t.raw());
-    t.addFirst(2);
+    System.out.println(t.removeLast());
     System.out.println(t.toString());
     System.out.println(t.raw());
   }
