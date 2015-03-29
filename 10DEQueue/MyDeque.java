@@ -1,23 +1,23 @@
 import java.util.*;
 
-public class MyDeque{
-  private Object[]data;
+public class MyDeque<T>{
+  private T[]data;
   private int head,tail,size;
 
-  public MyDeque(){
-    data = new Object[100];
+  public MyDeque<T>(){
+    data = new T[100];
     head=99;
     tail=0;
   }
 
-  public MyDeque(int n){
-    data = new Object[n];
+  public MyDeque<T>(int n){
+    data = new T[n];
     head=n-1;
     tail=0;
   }
 
   private void resize(){
-    Object[]replace=new Object[data.length*2];
+    T[]replace=new T[data.length*2];
     for(int i=0;i<tail+1;i++){
 	    replace[i]=data[i];
     }
@@ -32,7 +32,7 @@ public class MyDeque{
     data=replace;
   }
     
-  public void addFirst(Object value){
+  public void addFirst(T value){
     if(head-1 < tail){
 	    resize();
     }
@@ -41,18 +41,18 @@ public class MyDeque{
     size++;
   }
 
-  public Object removeFirst(){
+  public T removeFirst(){
     if(size==0){
       throw new NoSuchElementException();
     }else{
       size--;
       if(head!=data.length-1){
         head++;
-        Object out = data[head];
+        T out = data[head];
         data[head]=null;
         return out;
       }else{
-        Object out = data[0];
+        T out = data[0];
         for(int i=0;i<tail;i++){
           data[i]=data[i+1];
         }
@@ -62,7 +62,7 @@ public class MyDeque{
     }
   }
 
-  public void addLast(Object value){
+  public void addLast(T value){
     if(tail+1 > head){
       resize();
     }
@@ -71,18 +71,18 @@ public class MyDeque{
     size++;
   }
 
-  public Object removeLast(){
+  public T removeLast(){
     if(size==0){
       throw new NoSuchElementException();
     }else{
       size--;
       if(tail!=0){
         tail--;
-        Object out = data[tail];
+        T out = data[tail];
         data[tail]=null;
         return out;
       }else{
-        Object out = data[data.length-1];
+        T out = data[data.length-1];
         for(int i=data.length-1;i>head;i--){
           data[i]=data[i-1];
         }
@@ -92,7 +92,7 @@ public class MyDeque{
     }
   }
 
-  public Object getFirst(){
+  public T getFirst(){
     if(size==0){
       throw new NoSuchElementException();
     }else{
@@ -104,17 +104,17 @@ public class MyDeque{
     }
   }
 
-    public Object getLast(){
-      if(size==0){
-        throw new NoSuchElementException();
+  public T getLast(){
+    if(size==0){
+      throw new NoSuchElementException();
+    }else{
+      if(tail!=0){
+        return data[tail-1];
       }else{
-        if(tail!=0){
-          return data[tail-1];
-        }else{
-          return data[data.length-1];
-        }
+        return data[data.length-1];
       }
     }
+  }
     
   public String toString(){
     String out = "[ ";
@@ -138,9 +138,9 @@ public class MyDeque{
     }
     return out + "]";
   }
-
+  /*
   public static void main(String[]meow){
-    MyDeque t = new MyDeque(5);
+    MyDeque<Integer> t = new MyDeque<Integer>(5);
     t.addFirst(0);
     t.addFirst(1);
     t.addFirst(-1);
@@ -148,8 +148,10 @@ public class MyDeque{
     t.addFirst(2);
     System.out.println(t.toString());
     System.out.println(t.raw());
+    t.addLast(5);
     System.out.println(t.getFirst());
     System.out.println(t.toString());
     System.out.println(t.raw());
-  }
+    }
+  */
 }
