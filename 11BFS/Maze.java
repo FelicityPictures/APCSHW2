@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class Maze{
     private char[][]maze;
     private int maxx,maxy;
@@ -39,26 +42,39 @@ public class Maze{
 	}
     }
 
-    public String toString();//do not do the funky character codes
+    public String toString(){
+	String out = "";
+	for(int i=0;i<maze[0].length;i++){
+	    out = out + "\n";
+	    for(int ii=0;ii<maze.length;ii++){
+		out = out + maze[ii][i];
+	    }
+	}
+	return out;
+    }
 
-    public String toString(boolean animate); //do the funky character codes when animate is true
+    //public String toString(boolean animate); //do the funky character codes when animate is true
 
     /**Solve the maze using a frontier in a BFS manner. 
      * When animate is true, print the board at each step of the algorithm.
      * Replace spaces with x's as you traverse the maze. 
      */
-    public boolean solveBFS(boolean animate){    }
+     public boolean solveBFS(boolean animate){
+	 return false;
+     }
 
     /**Solve the maze using a frontier in a DFS manner. 
      * When animate is true, print the board at each step of the algorithm.
      * Replace spaces with x's as you traverse the maze. 
      */
-    public boolean solveDFS(boolean animate){    }
+    public boolean solveDFS(boolean animate){
+	return false;
+    }
 
     public boolean solveBFS(){
-	return solveBFS(false);
+	return false;
     }
     public boolean solveDFS(){
-	return solveDFS(false);
+	return false;
     }
 }
