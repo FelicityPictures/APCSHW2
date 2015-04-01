@@ -71,8 +71,23 @@ public class Maze{
 	return false;
     }
 
+    public Coordinates findStart(){
+	Coordinates s;
+	for(int i=0;i<maze[0].length;i++){
+	    for(int ii=0;ii<maze.length;ii++){
+		if(maze[ii][i]=='S'){
+		    s = new Coordinates(ii,i);
+		    return s;
+		}
+	    }
+	}
+	return null;
+    }
+
     public boolean solveBFS(){
-	return false;
+	Coordinates start=findStart();
+	MyDeQue a = new MyDeque();
+	a.addFirst(start);
     }
     public boolean solveDFS(){
 	return false;
