@@ -71,12 +71,12 @@ public class Maze{
 	return false;
     }
 
-    public Coordinates findStart(){
-	Coordinates s;
+    public Coordinate findStart(){
+	Coordinate s;
 	for(int i=0;i<maze[0].length;i++){
 	    for(int ii=0;ii<maze.length;ii++){
 		if(maze[ii][i]=='S'){
-		    s = new Coordinates(ii,i);
+		    s = new Coordinate(ii,i);
 		    return s;
 		}
 	    }
@@ -85,10 +85,60 @@ public class Maze{
     }
 
     public boolean solveBFS(){
-	Coordinates start=findStart();
-	MyDeQue a = new MyDeque();
+	Coordinate start=findStart();
+	MyDeque<Coordinate> a = new MyDeque<Coordinate>();
 	a.addFirst(start);
-    }
+	Coordinate last=new Coordinate(0,0);
+	while(a.size()!=0){
+	    Coordinate now = a.getFirst();
+	    int x = now.getX();
+	    int y = now.getY();
+	    if(x+1<maze[0].length && maze[x+1][y]=='.' || maze[x+1][y]=='E'){
+		if(maze[x+1][y]=='E'){
+		    last.setX(x+1);
+		    last.setY(y);
+		    last.setPrev(now);
+		    break;
+		}
+		Coordinate f = new Coordinate(now.getX()+1,now.getY(),now);
+		a.addFirst(f);
+       	    }
+	    if(x-1>0 && maze[x-1][y]=='.' || maze[x-1][y]=='E'){
+		if(maze[x-1][y]=='E'){
+		    last = new Coordinate(x-1,y,now);
+		    break;
+		}
+		Coordinate f = new Coordinate(now.getX()-1,now.getY(),now);
+		a.addFirst(f);
+	    }
+	    if(y+1<maze.length && maze[x][y+1]=='.' || maze[x][y+1]=='E'){
+		if(maze[x][y+1]=='E'){
+		    last = new Coordinate(x,y+1,now);
+		    break;
+		}
+		Coordinate f = new Coordinate(now.getX(),now.getY()+1,now);
+		a.addFirst(f);
+	    }
+	    if(y-1>0 && maze[x][y-1]=='.' || maze[x][y-1]=='E'){
+		if(maze[x][y-1]=='E'){
+		    last = new Coordinate(x,y-1,now);
+		    break;
+		}
+		Coordinate f = new Coordinate(now.getX(),now.getY()-1,now);
+		a.addFirst(f);
+	    }
+	    a.removeFirst();
+	}
+	String meow = "[ ";
+	while(last.hasPrevious()){
+	    meow = meow + last + " , ";
+	    last=last.getPrevious();
+	}
+	System.out.println( meow + last.toString() + " ]");
+	return false;
+	}
+
+
     public boolean solveDFS(){
 	return false;
     }

@@ -41,6 +41,10 @@ public class MyDeque<T>{
     size++;
   }
 
+  public int size(){
+      return size;
+  }
+
   public T removeFirst(){
     if(size==0){
       throw new NoSuchElementException();
@@ -152,6 +156,7 @@ public class MyDeque<T>{
     System.out.println(t.getLast());
     System.out.println(t.toString());
     System.out.println(t.raw());
+    System.out.println(t.size());
     }
   
 }
