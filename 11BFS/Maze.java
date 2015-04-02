@@ -99,7 +99,7 @@ public class Maze{
 		    last.setY(y);
 		    last.setPrev(now);
 		    break;
-		}
+		}//change for other cases
 		Coordinate f = new Coordinate(now.getX()+1,now.getY(),now);
 		a.addFirst(f);
        	    }
