@@ -97,22 +97,22 @@ public class Maze{
 	    int x = now.getX();
 	    int y = now.getY();
       out(x + "," + y);
-	    if(x+1<maze.length && maze[x+1][y]=='.' || maze[x+1][y]=='E'){
+	    if(x+1<maze.length && (maze[x+1][y]=='.' || maze[x+1][y]=='E')){
         if(maze[x+1][y]=='E'){
           last.setX(x+1);
           last.setY(y);
           last.setPrev(now);
           break;
         }//change for other cases
-        Coordinate f = new Coordinate(now.getX()+1,now.getY(),now);
+        Coordinate f = new Coordinate(x+1,y,now);
         a.addFirst(f);
       }
-	    if(x-1>=0 && maze[x-1][y]=='.' || maze[x-1][y]=='E'){
+	    if(x-1>=0 && (maze[x-1][y]=='.' || maze[x-1][y]=='E')){
         if(maze[x-1][y]=='E'){
           last = new Coordinate(x-1,y,now);
           break;
         }
-        Coordinate f = new Coordinate(now.getX()-1,now.getY(),now);
+        Coordinate f = new Coordinate(x-1,y,now);
         a.addFirst(f);
 	    }
 	    if(y+1<maze[0].length && maze[x][y+1]=='.' || maze[x][y+1]=='E'){
@@ -120,7 +120,7 @@ public class Maze{
           last = new Coordinate(x,y+1,now);
           break;
         }
-        Coordinate f = new Coordinate(now.getX(),now.getY()+1,now);
+        Coordinate f = new Coordinate(x,y+1,now);
         a.addFirst(f);
 	    }
 	    if(y-1>=0 && maze[x][y-1]=='.' || maze[x][y-1]=='E'){
@@ -128,7 +128,7 @@ public class Maze{
           last = new Coordinate(x,y-1,now);
           break;
         }
-        Coordinate f = new Coordinate(now.getX(),now.getY()-1,now);
+        Coordinate f = new Coordinate(x,y-1,now);
         a.addFirst(f);
 	    }
 	    a.removeFirst();
