@@ -4,18 +4,21 @@ public class MyDeque<T>{
   private T[]data;
   private int head,tail,size;
 
+  @SuppressWarnings("unchecked")
   public MyDeque(){
     data = (T[])(new Object[100]);
     head=99;
     tail=0;
   }
 
+  @SuppressWarnings("unchecked")
   public MyDeque(int n){
     data = (T[])(new Object[n]);
     head=n-1;
     tail=0;
   }
 
+  @SuppressWarnings("unchecked")
   private void resize(){
     T[]replace=(T[])(new Object[data.length*2]);
     for(int i=0;i<tail+1;i++){
