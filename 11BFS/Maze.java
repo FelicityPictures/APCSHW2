@@ -74,34 +74,155 @@ public class Maze{
 
   public String toString(boolean animate){
     if(animate){
-      String out = "";
-        for(int i=0;i<maze[0].length;i++){
-          out = out + "\n";
-          for(int ii=0;ii<maze.length;ii++){
-            out = out + maze[ii][i];
-            clearTerminal();
-            wait(100);
-            out(out);
-          }
-        }
-        return out;
+      return hide + go(0,0) + toString() + "\n" + show;
     }
     return toString();
   }
 
-  /**Solve the maze using a frontier in a BFS manner. 
-   * When animate is true, print the board at each step of the algorithm.
-   * Replace spaces with x's as you traverse the maze. 
-   */
   public boolean solveBFS(boolean animate){
+    if(!animate){
+      return solveBFS();
+    }
+    Coordinate start=new Coordinate(startx,starty);
+    MyDeque<Coordinate> a = new MyDeque<Coordinate>();
+    a.addFirst(start);
+    Coordinate last=new Coordinate(0,0);
+    while(a.size()>0){
+	    Coordinate now = a.getLast();
+	    int x = now.getX();
+	    int y = now.getY();
+	    if(x+1<maze.length && (maze[x+1][y]==' ' || maze[x+1][y]=='E')){
+        if(maze[x+1][y]=='E'){
+          last.setX(x+1);
+          last.setY(y);
+          last.setPrev(now);
+          break;
+        }
+        maze[x+1][y]='x';
+        Coordinate f = new Coordinate(x+1,y,now);
+        a.addFirst(f);
+      }
+	    if(x-1>=0 && (maze[x-1][y]==' ' || maze[x-1][y]=='E')){
+        if(maze[x-1][y]=='E'){
+          last = new Coordinate(x-1,y,now);
+          break;
+        }
+        maze[x-1][y]='x';
+        Coordinate f = new Coordinate(x-1,y,now);
+        a.addFirst(f);
+	    }
+	    if(y+1<maze[0].length && (maze[x][y+1]==' ' || maze[x][y+1]=='E')){
+        if(maze[x][y+1]=='E'){
+          last = new Coordinate(x,y+1,now);
+          break;
+        }
+        maze[x][y+1]='x';
+        Coordinate f = new Coordinate(x,y+1,now);
+        a.addFirst(f);
+	    }
+	    if(y-1>=0 && (maze[x][y-1]==' ' || maze[x][y-1]=='E')){
+        if(maze[x][y-1]=='E'){
+          last = new Coordinate(x,y-1,now);
+          break;
+        }
+        maze[x][y-1]='x';
+        Coordinate f = new Coordinate(x,y-1,now);
+        a.addFirst(f);
+	    }
+	    a.removeLast();
+      wait(200);
+      clearTerminal();
+      out(toString());
+    }
+    if(maze[last.getX()][last.getY()]=='E'){
+      while(last.hasPrevious()){
+        int x = last.getX();
+        int y = last.getY();
+        if(maze[x][y]!='E'){
+          maze[x][y]='@';
+        }
+        last=last.getPrevious();
+        wait(200);
+        clearTerminal();
+        out(toString());
+      }
+      return true;
+    }
     return false;
   }
 
-  /**Solve the maze using a frontier in a DFS manner. 
-   * When animate is true, print the board at each step of the algorithm.
-   * Replace spaces with x's as you traverse the maze. 
-   */
   public boolean solveDFS(boolean animate){
+    if(!animate){
+      return solveDFS();
+    }
+    Coordinate start = new Coordinate (startx,starty);
+    MyDeque<Coordinate> a = new MyDeque<Coordinate>();
+    a.addLast(start);
+    Coordinate last = new Coordinate(0,0);
+    while(a.size()>0){
+      Coordinate now = a.getLast();
+      int x = now.getX();
+      int y = now.getY();
+      int sizeBefore = a.size();
+      if(x+1<maze.length && (maze[x+1][y]==' ' || maze[x+1][y]=='E')){
+        if(maze[x+1][y]=='E'){
+          last.setX(x+1);
+          last.setY(y);
+          last.setPrev(now);
+          break;
+        }
+        maze[x+1][y]='x';
+        Coordinate f = new Coordinate(x+1,y,now);
+        a.addLast(f);
+      }
+      if(x-1>=0 && (maze[x-1][y]==' ' || maze[x-1][y]=='E')){
+        if(maze[x-1][y]=='E'){
+          last = new Coordinate(x-1,y,now);
+          break;
+        }
+        maze[x-1][y]='x';
+        Coordinate f = new Coordinate(x-1,y,now);
+        a.addLast(f);
+	    }
+	    if(y+1<maze[0].length && (maze[x][y+1]==' ' || maze[x][y+1]=='E')){
+        if(maze[x][y+1]=='E'){
+          last = new Coordinate(x,y+1,now);
+          break;
+        }
+        maze[x][y+1]='x';
+        Coordinate f = new Coordinate(x,y+1,now);
+        a.addLast(f);
+	    }
+	    if(y-1>=0 && (maze[x][y-1]==' ' || maze[x][y-1]=='E')){
+        if(maze[x][y-1]=='E'){
+          last = new Coordinate(x,y-1,now);
+          break;
+        }
+        maze[x][y-1]='x';
+        Coordinate f = new Coordinate(x,y-1,now);
+        a.addLast(f);
+	    }
+      if(sizeBefore==a.size()){
+        a.removeLast();
+      }
+      wait(200);
+      clearTerminal();
+      out(toString());
+    }
+    if(maze[last.getX()][last.getY()]=='E'){
+      while(last.hasPrevious()){
+        int x = last.getX();
+        int y = last.getY();
+        if(maze[x][y]!='E'){
+          maze[x][y]='@';
+        }
+        last=last.getPrevious();
+        wait(200);
+        clearTerminal();
+        out(toString());
+      }
+      return true;
+    }
     return false;
   }
 
@@ -121,41 +242,41 @@ public class Maze{
 	    int y = now.getY();
       // out(x + "," + y);
       // out(toString());
-	    if(x+1<maze.length && (maze[x+1][y]=='.' || maze[x+1][y]=='E')){
+	    if(x+1<maze.length && (maze[x+1][y]==' ' || maze[x+1][y]=='E')){
         if(maze[x+1][y]=='E'){
           last.setX(x+1);
           last.setY(y);
           last.setPrev(now);
           break;
         }
-        maze[x+1][y]='-';
+        maze[x+1][y]='x';
         Coordinate f = new Coordinate(x+1,y,now);
         a.addFirst(f);
       }
-	    if(x-1>=0 && (maze[x-1][y]=='.' || maze[x-1][y]=='E')){
+	    if(x-1>=0 && (maze[x-1][y]==' ' || maze[x-1][y]=='E')){
         if(maze[x-1][y]=='E'){
           last = new Coordinate(x-1,y,now);
           break;
         }
-        maze[x-1][y]='-';
+        maze[x-1][y]='x';
         Coordinate f = new Coordinate(x-1,y,now);
         a.addFirst(f);
 	    }
-	    if(y+1<maze[0].length && (maze[x][y+1]=='.' || maze[x][y+1]=='E')){
+	    if(y+1<maze[0].length && (maze[x][y+1]==' ' || maze[x][y+1]=='E')){
         if(maze[x][y+1]=='E'){
           last = new Coordinate(x,y+1,now);
           break;
         }
-        maze[x][y+1]='-';
+        maze[x][y+1]='x';
         Coordinate f = new Coordinate(x,y+1,now);
         a.addFirst(f);
 	    }
-	    if(y-1>=0 && (maze[x][y-1]=='.' || maze[x][y-1]=='E')){
+	    if(y-1>=0 && (maze[x][y-1]==' ' || maze[x][y-1]=='E')){
         if(maze[x][y-1]=='E'){
           last = new Coordinate(x,y-1,now);
           break;
         }
-        maze[x][y-1]='-';
+        maze[x][y-1]='x';
         Coordinate f = new Coordinate(x,y-1,now);
         a.addFirst(f);
 	    }
@@ -183,8 +304,70 @@ public class Maze{
 
 
   public boolean solveDFS(){
-    return solve(startx,starty);
-  }
+    Coordinate start = new Coordinate (startx,starty);
+    MyDeque<Coordinate> a = new MyDeque<Coordinate>();
+    a.addLast(start);
+    Coordinate last = new Coordinate(0,0);
+    while(a.size()>0){
+      Coordinate now = a.getLast();
+      int x = now.getX();
+      int y = now.getY();
+      int sizeBefore = a.size();
+      if(x+1<maze.length && (maze[x+1][y]==' ' || maze[x+1][y]=='E')){
+        if(maze[x+1][y]=='E'){
+          last.setX(x+1);
+          last.setY(y);
+          last.setPrev(now);
+          break;
+        }
+        maze[x+1][y]='x';
+        Coordinate f = new Coordinate(x+1,y,now);
+        a.addLast(f);
+      }
+      if(x-1>=0 && (maze[x-1][y]==' ' || maze[x-1][y]=='E')){
+        if(maze[x-1][y]=='E'){
+          last = new Coordinate(x-1,y,now);
+          break;
+        }
+        maze[x-1][y]='x';
+        Coordinate f = new Coordinate(x-1,y,now);
+        a.addLast(f);
+	    }
+	    if(y+1<maze[0].length && (maze[x][y+1]==' ' || maze[x][y+1]=='E')){
+        if(maze[x][y+1]=='E'){
+          last = new Coordinate(x,y+1,now);
+          break;
+        }
+        maze[x][y+1]='x';
+        Coordinate f = new Coordinate(x,y+1,now);
+        a.addLast(f);
+	    }
+	    if(y-1>=0 && (maze[x][y-1]==' ' || maze[x][y-1]=='E')){
+        if(maze[x][y-1]=='E'){
+          last = new Coordinate(x,y-1,now);
+          break;
+        }
+        maze[x][y-1]='x';
+        Coordinate f = new Coordinate(x,y-1,now);
+        a.addLast(f);
+	    }
+      if(sizeBefore==a.size()){
+        a.removeLast();
+      }
+    }
+    if(maze[last.getX()][last.getY()]=='E'){
+      while(last.hasPrevious()){
+        int x = last.getX();
+        int y = last.getY();
+        if(maze[x][y]!='E'){
+          maze[x][y]='@';
+        }
+        last=last.getPrevious();
+      }
+      return true;
+    }
+    return false;
+	}
   
   private boolean solve(int x,int y){
     if(x<0 || y<0 || x>=maze.length || y>=maze[0].length){
@@ -195,15 +378,15 @@ public class Maze{
     if(maze[x][y] == 'E'){
       return true;
     }
-    if(maze[x][y] == '.' || maze[x][y] == 'S'){
-      if(maze[x][y]=='.'){
+    if(maze[x][y] == ' ' || maze[x][y] == 'S'){
+      if(maze[x][y]==' '){
       maze[x][y] = '@';
       }
       if(solve(x + 1, y) || solve( x, y + 1) ||
          solve(x - 1, y) ||	solve(x, y - 1)){
         return true;
       }
-      maze[x][y] = '-';
+      maze[x][y] = 'x';
     }
     return false;
   }
