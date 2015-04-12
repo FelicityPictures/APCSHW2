@@ -12,6 +12,23 @@ public class Maze{
   private String go(int x,int y){
     return ("\033[" + x + ";" + y + "H");
   }
+    
+
+  private String color(int foreground,int background){
+    return ("\033[0;" + foreground + ";" + background + "m");
+  }
+
+  public void clearTerminal(){
+    System.out.println(clear);
+  }
+
+  public void wait(int millis){
+    try {
+      Thread.sleep(millis);
+    }
+    catch (InterruptedException e) {
+    }
+  }
 
   public Maze(String filename){
     startx = -1;
@@ -55,7 +72,22 @@ public class Maze{
     return out;
   }
 
-  //public String toString(boolean animate); //do the funky character codes when animate is true
+  public String toString(boolean animate){
+    if(animate){
+      String out = "";
+        for(int i=0;i<maze[0].length;i++){
+          out = out + "\n";
+          for(int ii=0;ii<maze.length;ii++){
+            out = out + maze[ii][i];
+            clearTerminal();
+            wait(100);
+            out(out);
+          }
+        }
+        return out;
+    }
+    return toString();
+  }
 
   /**Solve the maze using a frontier in a BFS manner. 
    * When animate is true, print the board at each step of the algorithm.
@@ -158,25 +190,22 @@ public class Maze{
     if(x<0 || y<0 || x>=maze.length || y>=maze[0].length){
       return false;
     }
-    System.out.println(this);
+    //  System.out.println(this);
     // wait(20);
     if(maze[x][y] == 'E'){
       return true;
     }
     if(maze[x][y] == '.' || maze[x][y] == 'S'){
-      //mark the floor with @
       if(maze[x][y]=='.'){
       maze[x][y] = '@';
       }
-      //recursion ho!!
-      if( solve(x + 1, y) || solve( x, y + 1) ||
-          solve(x - 1, y) ||	solve(x, y - 1)){
+      if(solve(x + 1, y) || solve( x, y + 1) ||
+         solve(x - 1, y) ||	solve(x, y - 1)){
         return true;
       }
-      //replace the @ with a .
       maze[x][y] = '-';
     }
-    return false;//by default the maze didn't get solved
+    return false;
   }
 
 }
