@@ -92,12 +92,12 @@ public class Maze{
     a.addFirst(start);
     Coordinate last=new Coordinate(0,0);
     while(a.size()>0){
-      out(a.toString());
+      //  out(a.toString());
 	    Coordinate now = a.getLast();
 	    int x = now.getX();
 	    int y = now.getY();
-      out(x + "," + y);
-      out(toString());
+      // out(x + "," + y);
+      // out(toString());
 	    if(x+1<maze.length && (maze[x+1][y]=='.' || maze[x+1][y]=='E')){
         if(maze[x+1][y]=='E'){
           last.setX(x+1);
@@ -139,12 +139,19 @@ public class Maze{
 	    a.removeLast();
     }
     if(maze[last.getX()][last.getY()]=='E'){
-      String meow = "[ ";
+      // String meow = "[ ";
       while(last.hasPrevious()){
-        meow = meow + last + " , ";
+        int x = last.getX();
+        int y = last.getY();
+        if(maze[x][y]!='E'){
+          maze[x][y]='@';
+        }
         last=last.getPrevious();
+        //    meow = meow + last + " , ";
+        //   last=last.getPrevious();
       }
-      out("Solution: " + meow + last.toString() + " ]");
+      // out("Solution: " + meow + last.toString() + " ]");
+      out(toString());
       return true;
     }
     return false;
