@@ -35,6 +35,18 @@ public class MyDeque<T>{
     data=replace;
   }
     
+  public void clear(){
+    for(int i=tail;i>=0;i--){
+      data[i]=null;
+    }
+    for(int i=head;i<data.length;i++){
+      data[i]=null;
+    }
+    size=0;
+    tail = 0;
+    head = data.length-1;
+  }
+  
   public void addFirst(T value){
     if(head-1 < tail){
 	    resize();
@@ -153,11 +165,15 @@ public class MyDeque<T>{
     t.addFirst(-1);
     t.addFirst(-2);
     t.addFirst(2);
+    t.addLast(5);
+    System.out.println(t.toString());
+    t.clear();
     System.out.println(t.toString());
     System.out.println(t.raw());
-    t.addLast(5);
-    System.out.println(t.getLast());
-    System.out.println(t.toString());
+    System.out.println(t.size());
+t.addFirst(0);
+ t.addLast(5);
+ System.out.println(t.toString());
     System.out.println(t.raw());
     System.out.println(t.size());
     }
