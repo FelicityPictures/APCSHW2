@@ -103,7 +103,8 @@ public class Maze{
           last.setY(y);
           last.setPrev(now);
           break;
-        }//change for other cases
+        }
+        maze[x+1][y]='-';
         Coordinate f = new Coordinate(x+1,y,now);
         a.addFirst(f);
       }
@@ -112,33 +113,39 @@ public class Maze{
           last = new Coordinate(x-1,y,now);
           break;
         }
+        maze[x-1][y]='-';
         Coordinate f = new Coordinate(x-1,y,now);
         a.addFirst(f);
 	    }
-	    if(y+1<maze[0].length && maze[x][y+1]=='.' || maze[x][y+1]=='E'){
+	    if(y+1<maze[0].length && (maze[x][y+1]=='.' || maze[x][y+1]=='E')){
         if(maze[x][y+1]=='E'){
           last = new Coordinate(x,y+1,now);
           break;
         }
+        maze[x][y+1]='-';
         Coordinate f = new Coordinate(x,y+1,now);
         a.addFirst(f);
 	    }
-	    if(y-1>=0 && maze[x][y-1]=='.' || maze[x][y-1]=='E'){
+	    if(y-1>=0 && (maze[x][y-1]=='.' || maze[x][y-1]=='E')){
         if(maze[x][y-1]=='E'){
           last = new Coordinate(x,y-1,now);
           break;
         }
+        maze[x][y-1]='-';
         Coordinate f = new Coordinate(x,y-1,now);
         a.addFirst(f);
 	    }
-	    a.removeFirst();
+	    a.removeLast();
     }
-    String meow = "[ ";
-    while(last.hasPrevious()){
-	    meow = meow + last + " , ";
-	    last=last.getPrevious();
+    if(maze[last.getX()][last.getY()]=='E'){
+      String meow = "[ ";
+      while(last.hasPrevious()){
+        meow = meow + last + " , ";
+        last=last.getPrevious();
+      }
+      out("Solution: " + meow + last.toString() + " ]");
+      return true;
     }
-    System.out.println( meow + last.toString() + " ]");
     return false;
 	}
 
