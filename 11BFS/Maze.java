@@ -9,6 +9,10 @@ public class Maze{
   private static final String hide =  "\033[?25l";
   private static final String show =  "\033[?25h";
 
+  private String go(int x,int y){
+    return ("\033[" + x + ";" + y + "H");
+  }
+
   public Maze(String filename){
     startx = -1;
     starty = -1;
@@ -69,25 +73,12 @@ public class Maze{
     return false;
   }
 
-  public Coordinate findStart(){
-    Coordinate s;
-    for(int i=0;i<maze[0].length;i++){
-	    for(int ii=0;ii<maze.length;ii++){
-        if(maze[ii][i]=='S'){
-          s = new Coordinate(ii,i);
-          return s;
-        }
-	    }
-    }
-    return null;
-  }
-
-  public void out(String s){
+  private void out(String s){
     System.out.println(s);
   }
 
   public boolean solveBFS(){
-    Coordinate start=findStart();
+    Coordinate start=new Coordinate(startx,starty);
     MyDeque<Coordinate> a = new MyDeque<Coordinate>();
     a.addFirst(start);
     Coordinate last=new Coordinate(0,0);
@@ -158,7 +149,34 @@ public class Maze{
 	}
 
 
+
   public boolean solveDFS(){
-    return false;
+    return solve(startx,starty);
   }
+  
+  private boolean solve(int x,int y){
+    if(x<0 || y<0 || x>=maze.length || y>=maze[0].length){
+      return false;
+    }
+    System.out.println(this);
+    // wait(20);
+    if(maze[x][y] == 'E'){
+      return true;
+    }
+    if(maze[x][y] == '.' || maze[x][y] == 'S'){
+      //mark the floor with @
+      if(maze[x][y]=='.'){
+      maze[x][y] = '@';
+      }
+      //recursion ho!!
+      if( solve(x + 1, y) || solve( x, y + 1) ||
+          solve(x - 1, y) ||	solve(x, y - 1)){
+        return true;
+      }
+      //replace the @ with a .
+      maze[x][y] = '-';
+    }
+    return false;//by default the maze didn't get solved
+  }
+
 }
