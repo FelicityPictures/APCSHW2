@@ -93,10 +93,11 @@ public class Maze{
     Coordinate last=new Coordinate(0,0);
     while(a.size()>0){
       out(a.toString());
-	    Coordinate now = a.getFirst();
+	    Coordinate now = a.getLast();
 	    int x = now.getX();
 	    int y = now.getY();
       out(x + "," + y);
+      out(toString());
 	    if(x+1<maze.length && (maze[x+1][y]=='.' || maze[x+1][y]=='E')){
         if(maze[x+1][y]=='E'){
           last.setX(x+1);
