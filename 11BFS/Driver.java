@@ -1,8 +1,8 @@
 public class Driver{
     public static void main(String[]meow){
       Maze t = new Maze("Maze 1.txt");
-      //   t.solveBFS();
-      System.out.println(t);
+      t.toString(true);
+      /* System.out.println(t);
       int[]solveIt = t.solutionCoordinates();
 
       String s = "[ ";
@@ -11,6 +11,6 @@ public class Driver{
       }
       s=s+"]";
       System.out.println(s);
-      
+      */
     }
 }
