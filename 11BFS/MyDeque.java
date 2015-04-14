@@ -3,12 +3,14 @@ import java.util.*;
 public class MyDeque<T>{
   private T[]data;
   private int head,tail,size;
+  private int[]priority;
 
   @SuppressWarnings("unchecked")
   public MyDeque(){
     data = (T[])(new Object[100]);
     head=99;
     tail=0;
+    priority = new int[100];
   }
 
   @SuppressWarnings("unchecked")
@@ -16,6 +18,7 @@ public class MyDeque<T>{
     data = (T[])(new Object[n]);
     head=n-1;
     tail=0;
+    priority = new int[n];
   }
 
   @SuppressWarnings("unchecked")
@@ -158,24 +161,29 @@ public class MyDeque<T>{
     return out + "]";
   }
   
+  public void add(T thing,int p){
+      addLast(thing);
+      priority[size-1]=p;
+  }
+
+  public String printPriority(){
+      String out = "[ ";
+      for(int i=0;i<size;i++){
+	  out = out + priority[i] + " ";
+      }
+      return out + "]";
+  }
+
   public static void main(String[]meow){
     MyDeque<Integer> t = new MyDeque<Integer>(5);
-    t.addFirst(0);
-    t.addFirst(1);
-    t.addFirst(-1);
-    t.addFirst(-2);
-    t.addFirst(2);
-    t.addLast(5);
+    t.add(0,10);
+    t.add(1,9);
+    t.add(-1,11);
+    t.add(-2,12);
+    t.add(2,8);
+    t.add(5,5);
     System.out.println(t.toString());
-    t.clear();
-    System.out.println(t.toString());
-    System.out.println(t.raw());
-    System.out.println(t.size());
-t.addFirst(0);
- t.addLast(5);
- System.out.println(t.toString());
-    System.out.println(t.raw());
-    System.out.println(t.size());
+    System.out.println(t.printPriority());
     }
   
 }
