@@ -433,4 +433,16 @@ public class Maze{
 	}
 	return solution;
     }
+
+    //Mode 0: DFS
+    //Mode 1: BFS
+    public boolean solve(boolean animate,int mode){
+	if(mode==0){
+	    return solveDFS(animate);
+	}
+	if(mode==1){
+	    return solveBFS(animate);
+	}
+	return false;
+    }
 }
