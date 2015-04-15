@@ -36,6 +36,11 @@ public class MyDeque<T>{
     }
     head = ii;
     data=replace;
+    int[]n=new int[priority.length*2];
+    for(int c=0;c<priority.length;c++){
+      n[c]=priority[c];
+    }
+    priority = n;
   }
     
   public void clear(){
@@ -182,6 +187,7 @@ public class MyDeque<T>{
     t.add(-2,12);
     t.add(2,8);
     t.add(5,5);
+    t.add(8,2);
     System.out.println(t.toString());
     System.out.println(t.printPriority());
     }
