@@ -111,7 +111,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x+1][y]='x';
+		maze[x+1][y]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x+1,y,now);
 		a.addFirst(f);
 	    }
@@ -122,7 +125,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x-1][y]='x';
+		maze[x-1][y]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x-1,y,now);
 		a.addFirst(f);
 	    }
@@ -133,7 +139,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x][y+1]='x';
+		maze[x][y+1]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x,y+1,now);
 		a.addFirst(f);
 	    }
@@ -144,7 +153,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x][y-1]='x';
+		maze[x][y-1]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x,y-1,now);
 		a.addFirst(f);
 	    }
@@ -191,7 +203,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x+1][y]='x';
+		maze[x+1][y]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x+1,y,now);
 		a.addLast(f);
 	    }
@@ -202,7 +217,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x-1][y]='x';
+		maze[x-1][y]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x-1,y,now);
 		a.addLast(f);
 	    }
@@ -213,7 +231,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x][y+1]='x';
+		maze[x][y+1]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x,y+1,now);
 		a.addLast(f);
 	    }
@@ -224,7 +245,10 @@ public class Maze{
 		    last.setPrev(now);
 		    break;
 		}
-		maze[x][y-1]='x';
+		maze[x][y-1]='?';
+		if(maze[x][y]!='S'){
+		    maze[x][y]='x';
+		}
 		Coordinate f = new Coordinate(x,y-1,now);
 		a.addLast(f);
 	    }
