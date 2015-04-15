@@ -253,6 +253,8 @@ public class Maze{
 		a.addLast(f);
 	    }
 	    if(sizeBefore==a.size()){
+		Coordinate redo = a.getLast();
+		maze[redo.getX()][redo.getY()]='x';
 		a.removeLast();
 	    }
 	    wait(200);
