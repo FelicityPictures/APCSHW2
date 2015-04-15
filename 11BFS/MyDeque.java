@@ -2,8 +2,8 @@ import java.util.*;
 
 public class MyDeque<T>{
   private T[]data;
-  private int head,tail,size;
   private int[]priority;
+  private int head,tail,size;
 
   @SuppressWarnings("unchecked")
   public MyDeque(){
@@ -36,6 +36,11 @@ public class MyDeque<T>{
     }
     head = ii;
     data=replace;
+    int[]n=new int[priority.length*2];
+    for(int c=0;c<priority.length;c++){
+      n[c]=priority[c];
+    }
+    priority = n;
   }
     
   public void clear(){
@@ -174,16 +179,48 @@ public class MyDeque<T>{
       return out + "]";
   }
 
+  public T removeSmallest(){
+    int smallest = priority[0];
+    int place=0;
+    for(int i=0;i<size;i++){
+      if(priority[i]<smallest){
+        smallest = priority[i];
+        place=i;
+      }
+    }
+    for(int p=place;p<size-1;p++){
+      priority[p]=priority[p+1];
+    }
+    T out = data[place];
+    for(int i=place;i<size-1;i++){
+      data[i]=data[i+1];
+    }
+    tail--;
+    size--;
+    return out;
+  }
+
   public static void main(String[]meow){
     MyDeque<Integer> t = new MyDeque<Integer>(5);
-    t.add(0,10);
-    t.add(1,9);
-    t.add(-1,11);
-    t.add(-2,12);
-    t.add(2,8);
-    t.add(5,5);
-    System.out.println(t.toString());
-    System.out.println(t.printPriority());
+    t.add(10,20);
+    t.add(11,19);
+    t.add(13,17);
+    t.add(18,12);
+    t.add(20,10);
+    t.add(15,15);
+    System.out.println("Size: " + t.size());
+    System.out.println("List: " + t.toString());
+    System.out.println("Distances: " + t.printPriority());
+    System.out.println(t.removeSmallest());
+    System.out.println(t.removeSmallest());
+    System.out.println("Size: " + t.size());
+    System.out.println("List: " + t.toString());
+    System.out.println("Distances: " + t.printPriority());
+    t.add(30,00);
+    t.add(16,14);
+    System.out.println("Size: " + t.size());
+    System.out.println("List: " + t.toString());
+    System.out.println("Distances: " + t.printPriority());
     }
   
 }
