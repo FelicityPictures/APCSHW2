@@ -484,6 +484,15 @@ public class Maze{
 	return solution;
     }
 
+    private void findEnd(){
+	//started working on this	for(int i=0;
+    }
+
+    public boolean solveBest(){
+	Coordinate start = new Coordinate (startx,starty);
+	a.clear();
+    }
+
     //Mode 0: DFS
     //Mode 1: BFS
     public boolean solve(boolean animate,int mode){
