@@ -5,7 +5,6 @@ public class Maze{
   private char[][]maze;
   private int maxx,maxy;
   private int startx,starty;
-  private int endx,endy;
   private Coordinate last;
   private MyDeque<Coordinate> a;
   private static final String clear =  "\033[2J";
@@ -62,10 +61,6 @@ public class Maze{
         startx = i % maxx;
         starty = i / maxx;
 	    }
-      if(c == 'E'){
-        endx = i % maxx;
-        endy = i / maxx;
-      }
     }
   }
 
@@ -372,6 +367,8 @@ public class Maze{
     return false;
   }
 
+
+
   public boolean solveDFS(){
     Coordinate start = new Coordinate (startx,starty);
     a.clear();
@@ -487,8 +484,7 @@ public class Maze{
     return solution;
   }
 
-  public String findEnd(){
-    return "(" + endx + " " + endy + ")";
+  private void findEnd(){
     //started working on this	for(int i=0;
   }
 
