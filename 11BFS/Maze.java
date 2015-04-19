@@ -284,6 +284,85 @@ public class Maze{
     return false;
   }
 
+  public boolean solveBest(boolean animate){
+    Coordinate start = new Coordinate (startx,starty);
+    a.clear();
+    a.add(start,findDistance(start,last));
+    last = new Coordinate(endx,endy);
+    while(a.size()!=0){
+      Coordinate now = a.removeSmallest();
+      int x = now.getX();
+      int y = now.getY();
+      if(x+1<maze.length && (maze[x+1][y]==' ' || maze[x+1][y]=='E')){
+        if(maze[x+1][y]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x+1][y]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x+1,y,now);
+        a.add(f,findDistance(now,last));
+      }
+      if(x-1>=0 && (maze[x-1][y]==' ' || maze[x-1][y]=='E')){
+        if(maze[x-1][y]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x-1][y]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x-1,y,now);
+        a.add(f,findDistance(now,last));
+      }
+      if(y+1<maze[0].length && (maze[x][y+1]==' ' || maze[x][y+1]=='E')){
+        if(maze[x][y+1]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x][y+1]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x,y+1,now);
+        a.add(f,findDistance(now,last));
+      }
+      if(y-1>=0 && (maze[x][y-1]==' ' || maze[x][y-1]=='E')){
+        if(maze[x][y-1]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x][y-1]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x,y-1,now);
+        a.add(f,findDistance(now,last));
+      }
+	    wait(200);
+	    clearTerminal();
+	    out(toString());
+    }
+    if(maze[last.getX()][last.getY()]=='E'){
+	    Coordinate p = last;
+	    while(p.hasPrevious()){
+        int x = p.getX();
+        int y = p.getY();
+        if(maze[x][y]!='E'){
+          maze[x][y]='@';
+        }
+        p=p.getPrevious();
+        wait(200);
+        clearTerminal();
+        out(toString());
+	    }
+	    return true;
+    }
+    return false;
+  }
+
   private void out(String s){
     System.out.println(s);
   }
@@ -498,18 +577,89 @@ public class Maze{
   public boolean solveBest(){
     Coordinate start = new Coordinate (startx,starty);
     a.clear();
-    last= new Coordinate(endx,endy);
+    a.add(start,findDistance(start,last));
+    last = new Coordinate(endx,endy);
+    while(a.size()!=0){
+      Coordinate now = a.removeSmallest();
+      int x = now.getX();
+      int y = now.getY();
+      if(x+1<maze.length && (maze[x+1][y]==' ' || maze[x+1][y]=='E')){
+        if(maze[x+1][y]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x+1][y]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x+1,y,now);
+        a.add(f,findDistance(now,last));
+      }
+      if(x-1>=0 && (maze[x-1][y]==' ' || maze[x-1][y]=='E')){
+        if(maze[x-1][y]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x-1][y]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x-1,y,now);
+        a.add(f,findDistance(now,last));
+      }
+      if(y+1<maze[0].length && (maze[x][y+1]==' ' || maze[x][y+1]=='E')){
+        if(maze[x][y+1]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x][y+1]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x,y+1,now);
+        a.add(f,findDistance(now,last));
+      }
+      if(y-1>=0 && (maze[x][y-1]==' ' || maze[x][y-1]=='E')){
+        if(maze[x][y-1]=='E'){
+          last.setPrev(now);
+          break;
+        }
+        maze[x][y-1]='?';
+        if(maze[x][y]!='S'){
+          maze[x][y]='x';
+        }
+        Coordinate f = new Coordinate(x,y-1,now);
+        a.add(f,findDistance(now,last));
+      }
+    }
+    if(maze[last.getX()][last.getY()]=='E'){
+	    Coordinate p = last;
+	    while(p.hasPrevious()){
+        int x = p.getX();
+        int y = p.getY();
+        if(maze[x][y]!='E'){
+          maze[x][y]='@';
+        }
+        p=p.getPrevious();
+	    }
+	    return true;
+    }
     return false;
   }
 
+
   //Mode 0: DFS
   //Mode 1: BFS
+  //Mode 2: Best
   public boolean solve(boolean animate,int mode){
     if(mode==0){
 	    return solveDFS(animate);
     }
     if(mode==1){
 	    return solveBFS(animate);
+    }
+    if(mode==2){
+      return solveBest(animate);
     }
     return false;
   }
