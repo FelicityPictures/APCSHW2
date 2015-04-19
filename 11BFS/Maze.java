@@ -285,10 +285,13 @@ public class Maze{
   }
 
   public boolean solveBest(boolean animate){
+    if(!animate){
+      return solveBest();
+  }
     Coordinate start = new Coordinate (startx,starty);
     a.clear();
-    a.add(start,findDistance(start,last));
     last = new Coordinate(endx,endy);
+    a.add(start,findDistance(start,last));
     while(a.size()!=0){
       Coordinate now = a.removeSmallest();
       int x = now.getX();
@@ -568,12 +571,6 @@ public class Maze{
     return solution;
   }
 
-  public int findDistance(Coordinate c,Coordinate d){
-    int xDistance = Math.abs(c.getX()-d.getX());
-    int yDistance = Math.abs(c.getY()-d.getY());
-    return xDistance + yDistance;
-  } 
-
   public boolean solveBest(){
     Coordinate start = new Coordinate (startx,starty);
     a.clear();
@@ -648,6 +645,12 @@ public class Maze{
   }
 
 
+  public static int findDistance(Coordinate c,Coordinate d){
+    int xDistance = Math.abs(c.getX()-d.getX());
+    int yDistance = Math.abs(c.getY()-d.getY());
+    return xDistance + yDistance;
+  }
+
   //Mode 0: DFS
   //Mode 1: BFS
   //Mode 2: Best
@@ -663,5 +666,4 @@ public class Maze{
     }
     return false;
   }
-
 }
