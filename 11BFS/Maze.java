@@ -5,6 +5,7 @@ public class Maze{
   private char[][]maze;
   private int maxx,maxy;
   private int startx,starty;
+  private int endx,endy;
   private Coordinate last;
   private MyDeque<Coordinate> a;
   private static final String clear =  "\033[2J";
@@ -61,6 +62,10 @@ public class Maze{
         startx = i % maxx;
         starty = i / maxx;
 	    }
+      if(c == 'E'){
+        endx = i % maxx;
+        endy = i / maxx;
+      }
     }
   }
 
@@ -484,13 +489,16 @@ public class Maze{
     return solution;
   }
 
-  private void findEnd(){
-    //started working on this	for(int i=0;
-  }
+  public int findDistance(Coordinate c,Coordinate d){
+    int xDistance = Math.abs(c.getX()-d.getX());
+    int yDistance = Math.abs(c.getY()-d.getY());
+    return xDistance + yDistance;
+  } 
 
   public boolean solveBest(){
     Coordinate start = new Coordinate (startx,starty);
     a.clear();
+    last= new Coordinate(endx,endy);
     return false;
   }
 
@@ -505,4 +513,5 @@ public class Maze{
     }
     return false;
   }
+
 }
