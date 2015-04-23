@@ -31,7 +31,7 @@ public class TreeNode<T>{
 	right = plus;
     }
 
-    public boolean full(){
+    private boolean full(){
 	if(left == null || right == null){
 	    return false;
 	}
