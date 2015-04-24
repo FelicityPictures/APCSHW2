@@ -48,4 +48,11 @@ public class BTree<T>{
 	     }
 	 }
     }
+
+    public void preOrder(TreeNode<T> curr){
+	String s = "[ " + curr.getData();
+	if(!curr.full()){
+	    //recursive?    
+	}
+    }
 }
