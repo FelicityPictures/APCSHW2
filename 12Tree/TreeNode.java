@@ -50,8 +50,6 @@ public class TreeNode<T>{
 	    return true;
 	}
     }
-
-    public boolean 
     
     public String toString(){
 	return "" + data;
