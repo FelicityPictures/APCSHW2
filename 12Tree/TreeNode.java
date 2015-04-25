@@ -1,67 +1,71 @@
 public class TreeNode<T>{
-    private T data;
-    private TreeNode<T>left;
-    private TreeNode<T>right;
+  private T data;
+  private TreeNode<T>left;
+  private TreeNode<T>right;
 
-    public TreeNode(T value){
-	data = value;
-    }
+  public TreeNode(T value){
+    data = value;
+  }
 
-    public T getData(){
-	return data;
-    }
+  public T getData(){
+    return data;
+  }
 
-    public void setData(T value){
-	data = value;
-    }
+  public void setData(T value){
+    data = value;
+  }
 
-    public TreeNode<T> getLeft(){
-	return left;
-    }
+  public TreeNode<T> getLeft(){
+    return left;
+  }
 
-    public void setLeft(TreeNode<T> plus){
-	left = plus;
-    }
+  public void setLeft(TreeNode<T> plus){
+    left = plus;
+  }
 
-    public TreeNode<T> getRight(){
-	return right;
-    }
+  public TreeNode<T> getRight(){
+    return right;
+  }
 
-    public void setRight(TreeNode<T> plus){
-	right = plus;
-    }
+  public void setRight(TreeNode<T> plus){
+    right = plus;
+  }
 
-    private boolean full(){
-	if(left == null || right == null){
+  public boolean hasSomething(){
+    return (left != null || right != null);
+  }
+
+  private boolean full(){
+    if(left == null || right == null){
 	    return false;
-	}
-	return true;
     }
+    return true;
+  }
 
-    public boolean add(TreeNode<T> plus){
-	if(full()){
+  public boolean add(TreeNode<T> plus){
+    if(full()){
 	    return false;
-	}else{
+    }else{
 	    if(left==null){
-		left = plus;
+        left = plus;
 	    }else{
-		right = plus;
+        right = plus;
 	    }
 	    return true;
-	}
     }
+  }
     
-    public String toString(){
-	return "" + data;
-    }
+  public String toString(){
+    return "" + data;
+  }
 
-    public static void main(String[]meow){
-	TreeNode<Integer> a = new TreeNode<Integer>(5);
-	TreeNode<Integer> b = new TreeNode<Integer>(6);
-	TreeNode<Integer> c = new TreeNode<Integer>(7);
-	a.setLeft(b);
-	a.setRight(c);
-	System.out.println(a.toString());
-	System.out.println(a.getLeft().getData());
-    }
+  public static void main(String[]meow){
+    TreeNode<Integer> a = new TreeNode<Integer>(5);
+    TreeNode<Integer> b = new TreeNode<Integer>(6);
+    TreeNode<Integer> c = new TreeNode<Integer>(7);
+    a.setLeft(b);
+    a.setRight(c);
+    System.out.println(a.toString());
+    System.out.println(a.getLeft().getData());
+  }
 }
