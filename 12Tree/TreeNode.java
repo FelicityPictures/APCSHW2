@@ -41,7 +41,7 @@ public class TreeNode<T>{
     }
     return true;
   }
-
+  /*
   public boolean add(TreeNode<T> plus){
     if(full()){
 	    return false;
@@ -53,7 +53,7 @@ public class TreeNode<T>{
 	    }
 	    return true;
     }
-  }
+    }*/
     
   public String toString(){
     return "" + data;
@@ -61,11 +61,12 @@ public class TreeNode<T>{
 
   public static void main(String[]meow){
     TreeNode<Integer> a = new TreeNode<Integer>(5);
+    System.out.println(a.getLeft());
     TreeNode<Integer> b = new TreeNode<Integer>(6);
     TreeNode<Integer> c = new TreeNode<Integer>(7);
-    a.setLeft(b);
-    a.setRight(c);
+    // a.setLeft(b);
+    //  a.setRight(c);
     System.out.println(a.toString());
-    System.out.println(a.getLeft().getData());
+    System.out.println(a.hasSomething());
   }
 }

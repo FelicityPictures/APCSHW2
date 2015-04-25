@@ -59,27 +59,33 @@ public class BTree<T>{
   public void preOrder(TreeNode<T> curr){
     System.out.println("[ " + preO(curr) + "]");
   }
-  private String preO(TreeNode<T> tree){
-    String s = "" + tree.getData() + " ";
-    if(!tree.hasSomething()){
+  private String preO(TreeNode<T> branch){
+    String s = "" + branch.getData() + " ";
+    System.out.println(branch.getLeft());
+    System.out.println(branch.getRight());
+    System.out.println(s);
+    if(!branch.hasSomething()){
       return s;
     }else{
-      if(tree.getLeft()!=null && tree.getRight()!=null){
-        return s + preO(tree.getLeft()) + " " + preO(tree.getRight()) + " ";
-      }else{
-        if(tree.getLeft()!=null){
-          return s + preO(tree.getLeft()) + " ";
-        }else{
-        return s + preO(tree.getLeft()) + " ";
-        }
+      if(branch.getLeft()!=null && branch.getRight()!=null){
+        return s + preO(branch.getLeft()) + preO(branch.getRight());
+      }
+      if(branch.getLeft()!=null && branch.getRight()==null){
+        return s + preO(branch.getLeft()) + " ";
+      }
+      if(branch.getLeft()==null && branch.getRight()!=null){
+        return s + preO(branch.getLeft()) + " ";
       }
     }
+    return "";
   }
 
   public static void main(String[]meow){
     BTree<Integer>t = new BTree<Integer>();
     t.add(1);
+    t.traverse(0);
     t.add(2);
+    t.traverse(0);
     t.add(3);
     t.add(4);
     t.traverse(0);
