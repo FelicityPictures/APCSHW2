@@ -40,16 +40,14 @@ public class BTree<T>{
     }
   }
 
-  //add modes to traverse
 
   public void traverse(int mode){
-    if ( mode == PRE_ORDER )
+    if (mode == PRE_ORDER)
 	    preOrder( root );
-    /*  else if ( mode == IN_ORDER )
-	    inOrder( root );
+    else if (mode == IN_ORDER)
+	    inOrder(root);
     else
-	    postOrder( root );
-    */
+	    postOrder(root);
   }
 
   public void preOrder(TreeNode<T> curr){
@@ -68,14 +66,63 @@ public class BTree<T>{
         return s + preO(branch.getLeft()) + preO(branch.getRight());
       }
       if(branch.getLeft()!=null && branch.getRight()==null){
-        return s + preO(branch.getLeft()) + "";
+        return s + preO(branch.getLeft());
       }
       if(branch.getLeft()==null && branch.getRight()!=null){
-        return s + preO(branch.getRight()) + "";
+        return s + preO(branch.getRight());
       }
     }
     return "";
   }
+
+  public void inOrder(TreeNode<T> curr){
+    System.out.println("[ " + inO(curr) + "]");
+  }
+  public String inO(TreeNode<T>branch){
+    String s = "" + branch.getData() + " ";
+    System.out.println("\n Now:" + branch.getData());
+    System.out.println("Left:" + branch.getLeft());
+    System.out.println("Right:" + branch.getRight());
+    if(!branch.hasSomething()){
+      return s;
+    }else{
+      if(branch.getLeft()!=null && branch.getRight()!=null){
+        return inO(branch.getLeft()) + s + inO(branch.getRight());
+      }
+      if(branch.getLeft()!=null && branch.getRight()==null){
+        return inO(branch.getLeft()) + s;
+      }
+      if(branch.getLeft()==null && branch.getRight()!=null){
+        return s + inO(branch.getRight());
+      }
+    }
+    return "";
+  }
+
+  public void postOrder(TreeNode<T> curr){
+    System.out.println("[ " + postO(curr) + "]");
+  }
+  public String postO(TreeNode<T>branch){
+    String s = "" + branch.getData() + " ";
+    System.out.println("\n Now:" + branch.getData());
+    System.out.println("Left:" + branch.getLeft());
+    System.out.println("Right:" + branch.getRight());
+    if(!branch.hasSomething()){
+      return s;
+    }else{
+      if(branch.getLeft()!=null && branch.getRight()!=null){
+        return postO(branch.getLeft()) + postO(branch.getRight()) + s;
+      }
+      if(branch.getLeft()!=null && branch.getRight()==null){
+        return postO(branch.getLeft()) + s;
+      }
+      if(branch.getLeft()==null && branch.getRight()!=null){
+        return postO(branch.getRight()) + s;
+      }
+    }
+    return "";
+  }
+
 
   public static void main(String[]meow){
     BTree<Integer>t = new BTree<Integer>();
@@ -92,7 +139,7 @@ public class BTree<T>{
     t.add(11);
     t.add(12);
     t.add(13);
-    t.traverse(0);
+    t.traverse(2);
   }
 
 }
