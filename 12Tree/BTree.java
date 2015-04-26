@@ -78,7 +78,7 @@ public class BTree<T>{
   public void inOrder(TreeNode<T> curr){
     System.out.println("[ " + inO(curr) + "]");
   }
-  public String inO(TreeNode<T>branch){
+  private String inO(TreeNode<T>branch){
     String s = "" + branch.getData() + " ";
     System.out.println("\n Now:" + branch.getData());
     System.out.println("Left:" + branch.getLeft());
@@ -102,7 +102,7 @@ public class BTree<T>{
   public void postOrder(TreeNode<T> curr){
     System.out.println("[ " + postO(curr) + "]");
   }
-  public String postO(TreeNode<T>branch){
+  private String postO(TreeNode<T>branch){
     String s = "" + branch.getData() + " ";
     System.out.println("\n Now:" + branch.getData());
     System.out.println("Left:" + branch.getLeft());
@@ -123,6 +123,62 @@ public class BTree<T>{
     return "";
   }
 
+  public int getHeight(){
+    return getHeight(root);
+  }
+  public int getHeight(TreeNode<T>curr){
+    return getH(curr,1);
+  }
+  private int getH(TreeNode<T>curr,int currentLevel){
+    if(curr.getLeft()==null && curr.getRight()==null){
+      return currentLevel;
+    }else{
+      if(curr.getLeft()==null && curr.getRight()!=null){
+        return getH(curr.getRight(),currentLevel+1);
+      }
+      if(curr.getLeft()!=null && curr.getRight()==null){
+        return getH(curr.getLeft(),currentLevel+1);
+      }
+      if(curr.getLeft()!=null && curr.getRight()!=null){
+        int x = getH(curr.getLeft(),currentLevel+1);
+        int y = getH(curr.getRight(),currentLevel+1);
+        if(x>y){
+          return x;
+        }else{
+          return y;
+        }
+      }
+      return -1;
+    }
+  }
+  //confusion as to how to String it
+  private String getLevel(TreeNode<T>curr, int level){
+    return "" + getL(root,0,level);
+  }
+  private String getL(TreeNode<T>curr,int now,int aim){
+    if(now==aim){
+      return "" + curr.getData();
+    }else{
+      if(curr.getLeft()!=null && curr.getRight()!=null){
+        return "" + getL(curr.getLeft(),now+1,aim) +" "+ getL(curr.getRight(),now+1,aim)+ " ";
+      }
+      if(curr.getLeft()!=null && curr.getRight()==null){
+        return "" + getL(curr.getLeft(),now+1,aim)+" ";
+      }
+      if(curr.getLeft()==null && curr.getRight()!=null){
+        return "" + getL(curr.getRight(),now+1,aim)+" ";
+      }
+      return "";
+    }
+  }
+
+  public String toString(){
+    String s = "";
+    for(int i=0;i<getHeight();i++){
+      s = s+"\n"+getLevel(root,i);
+    }
+    return s;
+  }
 
   public static void main(String[]meow){
     BTree<Integer>t = new BTree<Integer>();
@@ -140,6 +196,8 @@ public class BTree<T>{
     t.add(12);
     t.add(13);
     t.traverse(2);
+    System.out.println("Height:" + t.getHeight());
+    System.out.println("\n toString:" + t);
   }
 
 }
