@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-//Random seed set at 2
 
 public class BTree<T>{
   public static final int PRE_ORDER = 0;
@@ -23,19 +22,16 @@ public class BTree<T>{
   }
 
   private void add(TreeNode<T> curr, TreeNode<T> bn){
-    //random
-	    //0: add left
-	    //1: add right
-	    //Recursive: Keep going randomly until you're able to add
-    Random r = new Random(2);
-    int place = r.nextInt(2);
-    if(place == 0){
+    Random r = new Random();
+    int place = r.nextInt(100);
+    if(place%2 == 0){
       if(curr.getLeft() == null){
         curr.setLeft(bn);
       }else{
         add(curr.getLeft(),bn);
       }
-    }else{
+    }
+    if(place%2==1){
       if(curr.getRight() == null){
         curr.setRight(bn);
       }else{
@@ -58,12 +54,13 @@ public class BTree<T>{
 
   public void preOrder(TreeNode<T> curr){
     System.out.println("[ " + preO(curr) + "]");
+    // System.out.println("Root:" + curr.getData());
   }
   private String preO(TreeNode<T> branch){
     String s = "" + branch.getData() + " ";
-    System.out.println(branch.getLeft());
-    System.out.println(branch.getRight());
-    System.out.println(s);
+    //System.out.println("\n Now:" + branch.getData());
+    //System.out.println("Left:" + branch.getLeft());
+    //System.out.println("Right:" + branch.getRight());
     if(!branch.hasSomething()){
       return s;
     }else{
@@ -71,10 +68,10 @@ public class BTree<T>{
         return s + preO(branch.getLeft()) + preO(branch.getRight());
       }
       if(branch.getLeft()!=null && branch.getRight()==null){
-        return s + preO(branch.getLeft()) + " ";
+        return s + preO(branch.getLeft()) + "";
       }
       if(branch.getLeft()==null && branch.getRight()!=null){
-        return s + preO(branch.getLeft()) + " ";
+        return s + preO(branch.getRight()) + "";
       }
     }
     return "";
@@ -83,11 +80,18 @@ public class BTree<T>{
   public static void main(String[]meow){
     BTree<Integer>t = new BTree<Integer>();
     t.add(1);
-    t.traverse(0);
     t.add(2);
-    t.traverse(0);
     t.add(3);
     t.add(4);
+    t.add(5);
+    t.add(6);
+    t.add(7);
+    t.add(8);
+    t.add(9);
+    t.add(10);
+    t.add(11);
+    t.add(12);
+    t.add(13);
     t.traverse(0);
   }
 
