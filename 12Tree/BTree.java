@@ -157,16 +157,16 @@ public class BTree<T>{
   }
   private String getL(TreeNode<T>curr,int now,int aim){
     if(now==aim){
-      return "" + curr.getData();
+      return "" + curr.getData() + " ";
     }else{
       if(curr.getLeft()!=null && curr.getRight()!=null){
-        return "" + getL(curr.getLeft(),now+1,aim) +" "+ getL(curr.getRight(),now+1,aim)+ " ";
+        return "" + getL(curr.getLeft(),now+1,aim) + getL(curr.getRight(),now+1,aim);
       }
       if(curr.getLeft()!=null && curr.getRight()==null){
-        return "" + getL(curr.getLeft(),now+1,aim)+" ";
+        return "" + getL(curr.getLeft(),now+1,aim);
       }
       if(curr.getLeft()==null && curr.getRight()!=null){
-        return "" + getL(curr.getRight(),now+1,aim)+" ";
+        return "" + getL(curr.getRight(),now+1,aim);
       }
       return "";
     }
