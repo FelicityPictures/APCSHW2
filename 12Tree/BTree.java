@@ -80,9 +80,9 @@ public class BTree<T>{
   }
   private String inO(TreeNode<T>branch){
     String s = "" + branch.getData() + " ";
-    System.out.println("\n Now:" + branch.getData());
-    System.out.println("Left:" + branch.getLeft());
-    System.out.println("Right:" + branch.getRight());
+    //   System.out.println("\n Now:" + branch.getData());
+    //  System.out.println("Left:" + branch.getLeft());
+    //   System.out.println("Right:" + branch.getRight());
     if(!branch.hasSomething()){
       return s;
     }else{
@@ -104,9 +104,9 @@ public class BTree<T>{
   }
   private String postO(TreeNode<T>branch){
     String s = "" + branch.getData() + " ";
-    System.out.println("\n Now:" + branch.getData());
-    System.out.println("Left:" + branch.getLeft());
-    System.out.println("Right:" + branch.getRight());
+    //  System.out.println("\n Now:" + branch.getData());
+    //  System.out.println("Left:" + branch.getLeft());
+    //  System.out.println("Right:" + branch.getRight());
     if(!branch.hasSomething()){
       return s;
     }else{
@@ -197,7 +197,7 @@ public class BTree<T>{
     t.add(13);
     t.traverse(2);
     System.out.println("Height:" + t.getHeight());
-    System.out.println("\n toString:" + t);
+    System.out.println("\n" + "toString:" + t);
   }
 
 }
