@@ -32,8 +32,18 @@ public class BSTree<T extends Comparable>{
 
       Add t to the correct place in the tree rooted at curr.
       ====================*/
+    @SuppressWarnings("unchecked")
     private BSTreeNode<T> add(BSTreeNode<T> curr, BSTreeNode<T> t) {
-	return null;
+	if(curr==null){
+	    curr=t;
+	    return t;
+	}else{
+	    if(curr.getData().compareTo(t.getData())>0){
+		return add(curr.getLeft(),t);
+	    }else{
+		return add(curr.getRight(),t);
+	    }
+	}
     }
 
     /*======== public void remove() ==========
