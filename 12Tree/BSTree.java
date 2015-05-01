@@ -66,28 +66,9 @@ public class BSTree<T extends Comparable>{
       ====================*/
     @SuppressWarnings("unchecked")
 	private BSTreeNode<T> remove(BSTreeNode<T>curr,T c){
-	if(curr.getData().compareTo(c)>0){
-	    return remove(curr.getLeft(),c);
-	}
-	if(curr.getData().compareTo(c)<0){
-	    return remove(curr.getRight(),c);
-	}
-	if(curr.getData().compareTo(c)==0){
-	    if(isLeaf(curr)){
-		curr = null;
-	    }else{
-		if(curr.getRight()!=null){
-		    T moved = curr.getRight().getData();
-		    curr.setData(moved);
-		    return remove(curr.getRight(),moved);
-		}else{
-		    T moved = curr.getLeft().getData();
-		    curr.setData(moved);
-		    return remove(curr.getLeft(),moved);
-		}
-	    }
-	}	    
-	return null;
+	return curr;
+	//if(isLeaf(curr) && curr.getData().compareTo(c)==0){
+	    
     }
 
 
@@ -235,7 +216,14 @@ public class BSTree<T extends Comparable>{
     }
 
     public static void main( String[] args ) {
-
+	BSTree<Integer>t = new BTree<Integer>();
+	t.add(11);
+	t.add(5);
+	t.add(2);
+	t.add(7);
+	t.add(13);
+	t.add(50);
+	t.add(0);
     }
 
 }
