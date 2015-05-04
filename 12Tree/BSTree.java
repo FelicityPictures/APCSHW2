@@ -36,12 +36,6 @@ public class BSTree<T extends Comparable>{
     return curr;
   }
 
-  /*======== public void remove() ==========
-    Inputs:   T c  
-    Returns: 
-      
-    Wrapper for the recursive remove method
-    ====================*/
   public void remove(T c){
     root = remove(root,c);
   }
@@ -56,9 +50,16 @@ public class BSTree<T extends Comparable>{
     ====================*/
   @SuppressWarnings("unchecked")
     private BSTreeNode<T> remove(BSTreeNode<T>curr,T c){
+    if(curr.getData()==c && isLeaf(curr)){
+      curr = null;
+    }else{
+      if(curr.getData().compareTo(c)>0){
+        curr.setLeft(remove(curr.getLeft(),c));
+	    }else{
+        curr.setRight(remove(curr.getRight(),c));
+	    }
+    }
     return curr;
-    //if(isLeaf(curr) && curr.getData().compareTo(c)==0){
-	    
   }
 
 
@@ -215,6 +216,8 @@ public class BSTree<T extends Comparable>{
     t.add(50);
     t.add(0);
     System.out.println(t.toString());
+    t.remove(13);
+    System.out.println("\n \n \n"+t.toString());
   }
 
 }

@@ -8,7 +8,7 @@ public class Driver{
   }
 
   public static void main(String[]meow){
-    Maze t = new Maze("Maze 2.txt");
+    Maze t = new Maze("Maze 1.txt");
     if(meow.length != 2 ||
        (!meow[0].equals("true") && !meow[0].equals("false")) ||
        (!meow[1].equals("0") && !meow[1].equals("1") &&
