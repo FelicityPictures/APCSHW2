@@ -24,7 +24,6 @@ public class BSTree<T extends Comparable>{
     private BSTreeNode<T> add(BSTreeNode<T>curr,BSTreeNode<T>t){
     if(curr==null){
 	    curr=t;
-      System.out.println("Success " + t.getData());
 	    return t;
     }else{
 	    if(curr.getData().compareTo(t.getData())>0){
@@ -40,56 +39,39 @@ public class BSTree<T extends Comparable>{
     root = remove(root,c);
   }
 
-  /*======== public BSTreeNode<T> remove() ==========
-    Inputs:   BSTreeNode<T> curr
-    T c
-    Returns: 
-
-    Should remove the value c from the tree rooted at
-    curr, if it exists.
-    ====================*/
+  //learning from Peter's and Alvin's
   @SuppressWarnings("unchecked")
-    private BSTreeNode<T> remove(BSTreeNode<T>curr,T c){
-    /* if(curr==null){
+    private BSTreeNode<T> remove(BSTreeNode<T>curr,T p){
+    if (curr == null) {
       return curr;
+    } else if (isLeaf(curr) && curr.getData().compareTo(p) == 0) {
+      return null;
+    } else if (curr.getData().compareTo(p) > 0) {
+      curr.setLeft(remove(curr.getLeft(), p));
+    } else if (curr.getData().compareTo(p) < 0) {
+      curr.setRight(remove(curr.getRight(), p));
+    } else {
+      curr.setData(findReplacement(curr.getRight()).getData());
+      curr.setRight(remove(curr.getRight(), curr.getData()));
     }
-    if(curr.getData().compareTo(c)>0){
-      curr.setLeft(remove(curr.getLeft(),c));
-    }else{
-      if(curr.getData().compareTo(c)<0){
-        curr.setRight(remove(curr.getRight(),c));
-      }
-    }
-    if(!isLeaf(curr)){
-      curr.setData(findSmallest(curr.getRight()).getData());
-      curr.setRight(remove(curr.getRight(),curr.getData()));
-    }
-    curr=(curr.getLeft()!=null);*/
     return curr;
   }
   
-  private BSTreeNode<T> findSmallest(BSTreeNode<T> s){
+  private BSTreeNode<T> findReplacement(BSTreeNode<T> s){
     if(s==null){
       return null;
     }
     if(s.getLeft()==null){
       return s;
     }
-    return findSmallest(s.getLeft());
+    return findReplacement(s.getLeft());
   }
 
-
-  /*======== public void inOrder()) ==========
-    Inputs:   
-    Returns: 
-
-    Wrapper for the recursive inOrder method
-    ====================*/
   public void inOrder() {
     String s = "[ ";
     System.out.print("[ ");
     inOrderHelper(root);
-    System.out.print("]");
+    System.out.print("]" + "\n");
   }
 
   public void inOrderHelper(BSTreeNode<T>t) {
@@ -204,12 +186,21 @@ public class BSTree<T extends Comparable>{
     t.add(11);
     t.add(5);
     t.add(2);
+    t.remove(13);
+    t.remove(9);
+    System.out.println("\n\n\n" + t.toString());
+    t.inOrder();
     t.add(7);
     t.add(13);
     t.add(50);
-    t.add(0);
+    t.add(9);
+    t.add(70);
+    t.add(19);
     System.out.println(t.toString());
-    // t.remove(13);
+    t.inOrder();
+    t.remove(13);
+    t.remove(9);
+    System.out.println("\n\n\n" + t.toString());
     t.inOrder();
   }
 
