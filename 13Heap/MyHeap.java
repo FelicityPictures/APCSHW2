@@ -24,23 +24,27 @@ public class MyHeap{
   }
 
   public void add(int value){
+    System.out.println("Adding " + value);
     data[0]=data[0]+1;
     if(current==1){
 	    data[1]=value;
     }else{
 	    data[current]=value;
 	    if(value > data[current/2]){
+        int m = current;
         int i = current/2;
         int temp;
         while(i !=0 && value > data[i]){
           temp = data[i];
           data[i]=value;
-          data[i*2]=temp;
+          data[m]=temp;
+          m=i;
           i=i/2;
         }
 	    }
     }
     current++;
+    System.out.println(toString());
   }
 
   public int peek(){
