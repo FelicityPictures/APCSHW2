@@ -88,11 +88,28 @@ public class MyHeap{
 	}
     }
 
-    public String toString(){
+    public String raw(){
 	String out = "[ ";
 	for(int i=1;i<=data[0];i++){
 	    out = out + data[i] + " ";
 	}
 	return out +"]";
     }
+
+    public String toString(){
+	String out = "";
+	int lvl=1;
+	int c=0;
+	for(int i=1;i<current;c=0){
+	    while(c<lvl && i<current){
+		out = out+data[i] + " ";
+		i++;
+		c++;
+	    }
+	    lvl=lvl*2;
+	    out = out + "\n";
+	}
+	return out;
+    }
+	    
 }
