@@ -17,6 +17,13 @@ public class Driver{
 	t.add(9);
 	t.add(8);		 
 	out(t.raw());
-	out(t.toString());
+	//	out(t.toString());
+
+	t.remove();
+	t.remove();
+	out(t.raw());
+	t.add(-1);
+	t.add(14);
+	out(t.raw());
     }
 }
