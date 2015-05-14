@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+
 public class MyHeap{
   private int[]data;
   private boolean isMax;
@@ -24,7 +27,7 @@ public class MyHeap{
   }
 
   public void add(int value){
-    System.out.println("Adding " + value);
+    //      System.out.println("Adding " + value);
     data[0]=data[0]+1;
     if(current==1){
 	    data[1]=value;
@@ -44,7 +47,7 @@ public class MyHeap{
 	    }
     }
     current++;
-    System.out.println(toString());
+    //    System.out.println(toString());
   }
 
   public int peek(){
@@ -52,7 +55,37 @@ public class MyHeap{
   }
 
   public int remove(){
+    if(data[0]==0){
+      throw new NoSuchElementException();
+    }else{
+    data[0]=data[0]-1;
     int out = data[1];
+    data[1] = data[current-1];
+    current--;
+    System.out.println("Current: " +  current);
+    int i=1;
+    int temp;
+    System.out.println(toString());
+    while(i<current){
+      temp=data[i];
+      if(data[i*2]>data[i*2+1]){
+        data[i]=data[i*2];
+        data[i*2]=temp;
+        i=i*2;
+        System.out.println(i);
+      }else{
+        data[i]=data[i*2+1];
+        data[i*2+1]=temp;
+        i=i*2+1;
+        System.out.println(i);
+      }
+      System.out.println("in loop: " + toString());
+    }
+    // data[0]=data[0]-1;
+    return out;
+    }
+  }
+    /*
     int i=1;
     int temp;
     while(i<current){
@@ -68,9 +101,10 @@ public class MyHeap{
       }
     }
     data[0]=data[0]-1;
+    current--;
+    
     return out;
-  }
-
+    }*/
 
 
   public String toString(){
