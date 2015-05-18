@@ -13,6 +13,9 @@ public class Driver{
     t.add(1);
     t.add(7);
     t.add(5);
+    t.add(10);
+    t.add(11);
+    t.add(25);
     out(t.getMedian());
     out(t.toString());
   }

@@ -29,7 +29,7 @@ public class RunningMedian{
       median[0]=1;
     }else{
       if(median[0]==1){
-        if(value>median[0]){
+        if(value>median[1]){
           big.add(value);
           median[2]=big.remove();
         }else{
@@ -40,12 +40,12 @@ public class RunningMedian{
       }else{
         if(value>getMedian()){
           big.add(value);
-          if(median[0]>median[1]){
-            big.add(median[0]);
-            small.add(median[1]);
-          }else{
+          if(median[1]>median[2]){
             big.add(median[1]);
-            small.add(median[0]);
+            small.add(median[2]);
+          }else{
+            big.add(median[2]);
+            small.add(median[1]);
           }
           median[1]=big.remove();
         }else{
@@ -59,6 +59,7 @@ public class RunningMedian{
           }
           median[1]=small.remove();
         }
+        median[0]=1;
       }
     }
   }
@@ -70,4 +71,5 @@ public class RunningMedian{
     }
     return out + "]";
   }
+
 }
