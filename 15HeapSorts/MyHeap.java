@@ -85,6 +85,7 @@ public class MyHeap{
       data[0]=data[0]-1;
       int out = data[1];
       data[1] = data[current-1];
+      data[current-1]=out;
       current--;
       int i=1;
       int temp;
