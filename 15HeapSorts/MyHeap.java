@@ -138,8 +138,8 @@ public class MyHeap{
           }
         }
       }
-      System.out.println("Current" + current);
-      System.out.println("From remove" + raw());
+      //   System.out.println("Current" + current);
+      //    System.out.println("From remove" + raw());
 	    return out;
     }
   }

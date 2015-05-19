@@ -5,11 +5,11 @@ public class Driver{
     for(int i=0;i<a.length;i++){
       t.add(a[i]);
     }
-    out(t.raw());
+    //  out(t.raw());
     for(int i=0;i<a.length;i++){
       t.remove();
     }
-    System.out.println(t.raw());
+    // System.out.println(t.raw());
     return t.fromBiggest();
   }
 
@@ -28,7 +28,7 @@ public class Driver{
   public static void main(String[]meow){
     //  MyHeap t = new MyHeap(true);
 
-    int[]t={732,1203,324,203,231,189,10,374,340,140};
+    int[]t={240,364,13,829,439,294,2938,283,121,5};
     System.out.println(toString(HeapSort(t)));
 
     /*
