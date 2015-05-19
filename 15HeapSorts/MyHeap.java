@@ -4,7 +4,7 @@ import java.util.*;
 public class MyHeap{
   private int[]data;
   private boolean isMax;
-  private int current;
+  private int current,biggestItsBeen;
 
   public MyHeap(){
     data = new int[20];
@@ -72,6 +72,9 @@ public class MyHeap{
       }
     }
     current++;
+    if(current>biggestItsBeen){
+      biggestItsBeen=current;
+    }
   }
 
   public int peek(){
@@ -147,9 +150,17 @@ public class MyHeap{
     return out;
   }
 
-  public String full(){
+  public int[] fromBiggest(){
+    int[]out=new int[biggestItsBeen-1];
+    for(int i=1;i<biggestItsBeen;i++){
+      out[i-1]=data[i];
+    }
+    return out;
+  }
+
+  public String forSort(){
     String out = "[ ";
-    for(int i=0;i<data.length;i++){
+    for(int i=1;i<biggestItsBeen;i++){
       out = out + data[i] + " ";
     }
     return out + "]";
