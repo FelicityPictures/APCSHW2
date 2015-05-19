@@ -4,10 +4,10 @@ import java.util.*;
 public class MyHeap{
   private int[]data;
   private boolean isMax;
-  private int current;
+  private int current,biggestItsBeen;
 
   public MyHeap(){
-    data = new int[50];
+    data = new int[20];
     data[0]=0;
     current=1;
     isMax = true;
@@ -16,7 +16,7 @@ public class MyHeap{
   //true = max heap
   //false = min heap
   public MyHeap(boolean x){
-    data = new int[100];
+    data = new int[20];
     data[0]=0;
     current = 1;
     isMax = x;
@@ -72,6 +72,9 @@ public class MyHeap{
       }
     }
     current++;
+    if(current>biggestItsBeen){
+      biggestItsBeen=current;
+    }
   }
 
   public int peek(){
@@ -85,51 +88,70 @@ public class MyHeap{
       data[0]=data[0]-1;
       int out = data[1];
       data[1] = data[current-1];
+      data[current-1]=out;
       current--;
       int i=1;
       int temp;
       if(isMax){
-        while(i<current && i*2<current && i*2+1<current &&
-              (data[i]<data[i*2] || data[i]<data[i*2+1])){
-          temp=data[i];
-          if(data[i*2]>data[i*2+1]){
-            data[i]=data[i*2];
-            data[i*2]=temp;
-            i=i*2;
-          }else{
-            data[i]=data[i*2+1];
-            data[i*2+1]=temp;
-            i=i*2+1;
+        if(data[0]!=2){
+          while(i<current && i*2<current && i*2+1<current &&
+                (data[i]<data[i*2] || data[i]<data[i*2+1])){
+            //System.out.println("Loop!");
+            temp=data[i];
+            if(data[i*2]>data[i*2+1]){
+              data[i]=data[i*2];
+              data[i*2]=temp;
+              i=i*2;
+            }else{
+              data[i]=data[i*2+1];
+              data[i*2+1]=temp;
+              i=i*2+1;
+            }
+          }
+        }else{
+          if(data[1]<data[2]){
+            int replace=data[1];
+            data[1]=data[2];
+            data[2]=replace;
           }
         }
       }else{
-        while(i<current && i*2<current && i*2+1<current &&
-              (data[i]>data[i*2] || data[i]>data[i*2+1])){
-          System.out.println("Loop");
-          temp=data[i]; 
-          if(data[i*2]<data[i*2+1]){
-            data[i]=data[i*2];
-            data[i*2]=temp;
-            i=i*2;
-          }else{
-            data[i]=data[i*2+1];
-            data[i*2+1]=temp;
-            i=i*2+1;
+        if(data[0]!=2){
+          while(i<current && i*2<current && i*2+1<current &&
+                data[i]>data[i*2] && data[i]>data[i*2+1]){
+            temp=data[i]; 
+            if(data[i*2]<data[i*2+1]){
+              data[i]=data[i*2];
+              data[i*2]=temp;
+              i=i*2;
+            }else{
+              data[i]=data[i*2+1];
+              data[i*2+1]=temp;
+              i=i*2+1;
+            }
+          }
+        }else{
+          if(data[1]>data[2]){
+            int replace = data[1];
+            data[1]=data[2];
+            data[2]=replace;
           }
         }
       }
+      //   System.out.println("Current" + current);
+      //    System.out.println("From remove" + raw());
 	    return out;
     }
   }
-
+  //prints whole array
   public String raw(){
     String out = "[ ";
-    for(int i=1;i<=data[0];i++){
+    for(int i=1;i<data.length;i++){
 	    out = out + data[i] + " ";
     }
     return out +"]";
   }
-
+  //prints the one in heap
   public String toString(){
     String out = "";
     int lvl=1;
@@ -144,6 +166,22 @@ public class MyHeap{
 	    out = out + "\n";
     }
     return out;
+  }
+
+  public int[] fromBiggest(){
+    int[]out=new int[biggestItsBeen-1];
+    for(int i=1;i<biggestItsBeen;i++){
+      out[i-1]=data[i];
+    }
+    return out;
+  }
+
+  public String forSort(){
+    String out = "[ ";
+    for(int i=1;i<biggestItsBeen;i++){
+      out = out + data[i] + " ";
+    }
+    return out + "]";
   }
 	    
 }
