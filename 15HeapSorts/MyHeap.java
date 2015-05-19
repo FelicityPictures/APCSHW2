@@ -93,47 +93,65 @@ public class MyHeap{
       int i=1;
       int temp;
       if(isMax){
-        while(i<current && i*2<current && i*2+1<current &&
-              (data[i]<data[i*2] || data[i]<data[i*2+1])){
-          temp=data[i];
-          if(data[i*2]>data[i*2+1]){
-            data[i]=data[i*2];
-            data[i*2]=temp;
-            i=i*2;
-          }else{
-            data[i]=data[i*2+1];
-            data[i*2+1]=temp;
-            i=i*2+1;
+        if(data[0]!=2){
+          while(i<current && i*2<current && i*2+1<current &&
+                (data[i]<data[i*2] || data[i]<data[i*2+1])){
+            //System.out.println("Loop!");
+            temp=data[i];
+            if(data[i*2]>data[i*2+1]){
+              data[i]=data[i*2];
+              data[i*2]=temp;
+              i=i*2;
+            }else{
+              data[i]=data[i*2+1];
+              data[i*2+1]=temp;
+              i=i*2+1;
+            }
+          }
+        }else{
+          if(data[1]<data[2]){
+            int replace=data[1];
+            data[1]=data[2];
+            data[2]=replace;
           }
         }
       }else{
-        while(i<current && i*2<current && i*2+1<current &&
-              (data[i]>data[i*2] || data[i]>data[i*2+1])){
-          System.out.println("Loop");
-          temp=data[i]; 
-          if(data[i*2]<data[i*2+1]){
-            data[i]=data[i*2];
-            data[i*2]=temp;
-            i=i*2;
-          }else{
-            data[i]=data[i*2+1];
-            data[i*2+1]=temp;
-            i=i*2+1;
+        if(data[0]!=2){
+          while(i<current && i*2<current && i*2+1<current &&
+                data[i]>data[i*2] && data[i]>data[i*2+1]){
+            temp=data[i]; 
+            if(data[i*2]<data[i*2+1]){
+              data[i]=data[i*2];
+              data[i*2]=temp;
+              i=i*2;
+            }else{
+              data[i]=data[i*2+1];
+              data[i*2+1]=temp;
+              i=i*2+1;
+            }
+          }
+        }else{
+          if(data[1]>data[2]){
+            int replace = data[1];
+            data[1]=data[2];
+            data[2]=replace;
           }
         }
       }
+      System.out.println("Current" + current);
+      System.out.println("From remove" + raw());
 	    return out;
     }
   }
-
+  //prints whole array
   public String raw(){
     String out = "[ ";
-    for(int i=1;i<=data[0];i++){
+    for(int i=1;i<data.length;i++){
 	    out = out + data[i] + " ";
     }
     return out +"]";
   }
-
+  //prints the one in heap
   public String toString(){
     String out = "";
     int lvl=1;
