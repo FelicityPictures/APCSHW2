@@ -26,22 +26,23 @@ public class Driver{
   }
 
   public static void main(String[]meow){
-    //  MyHeap t = new MyHeap(true);
+      MyHeap t = new MyHeap(false);
 
-    int[]t={240,364,13,829,439,294,2938,283,121,5};
-    System.out.println(toString(HeapSort(t)));
+      //   int[]t={240,364,13,829,439,294,2938,283,121,5};
+      //    System.out.println(toString(HeapSort(t)));
 
-    /*
-      t.add(5);
-      t.add(4);
-      t.add(3);
-      t.add(7);
-      t.add(2);
+    
+      t.add(240);
+      t.add(364);
+      t.add(2793);
+      t.add(1293);
+      t.add(38);
       t.add(1);
-      t.add(10);
-      t.add(6);
-      t.add(9);
-      t.add(8);		 
+      t.add(189);
+      t.add(60);
+      t.add(25);
+      t.add(11);
+      out(t.raw());		 
       t.remove();		 
       t.remove();		 
       t.remove();		 
@@ -52,6 +53,6 @@ public class Driver{
       t.remove();		 
       t.remove();		 
       t.remove();
-      out(t.sort());*/
+      out(t.raw());
   }
 }
